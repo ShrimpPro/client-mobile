@@ -1,16 +1,12 @@
-import { StyleSheet, Image } from "react-native";
+import { StyleSheet, Image, View } from "react-native";
 import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { TextInput, HelperText, Button } from "react-native-paper";
+import { TextInput, HelperText, Button, Text } from "react-native-paper";
 
 export default function LoginScreen() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
-
-  const hasErrors = () => {
-    return false;
-  };
 
   const handleLogin = () => {
     console.log("login api");
@@ -25,6 +21,13 @@ export default function LoginScreen() {
           uri: "https://cdn.discordapp.com/attachments/1089065643346776075/1090570170487025754/20230329_163617_0000.png",
         }}
       />
+      <HelperText
+        style={{ marginBottom: 15, alignSelf: "center" }}
+        type="error"
+        visible={error}
+      >
+        Error on API response
+      </HelperText>
       <TextInput
         label="Username"
         value={username}
@@ -38,10 +41,9 @@ export default function LoginScreen() {
         mode="outlined"
         secureTextEntry={true}
         onChangeText={(value) => setPassword(value)}
+        style={{ marginBottom: 15 }}
       />
-      <HelperText style={{ marginBottom: 15 }} type="error" visible={error}>
-        Error on API response
-      </HelperText>
+
       <Button
         mode="contained"
         uppercase={true}
@@ -50,6 +52,10 @@ export default function LoginScreen() {
       >
         Login
       </Button>
+      <View style={styles.row}>
+        <Text style={{ paddingRight: 5 }}>Dont have an account?</Text>
+        <Text style={styles.register}>Register here</Text>
+      </View>
     </SafeAreaView>
   );
 }
@@ -69,5 +75,12 @@ const styles = StyleSheet.create({
   button: {
     borderRadius: 5,
     fontWeight: "bold",
+    marginBottom: 15,
+  },
+  row: {
+    flexDirection: "row",
+  },
+  register: {
+    color: "purple",
   },
 });
