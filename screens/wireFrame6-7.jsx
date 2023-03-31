@@ -5,7 +5,7 @@ import Graph from "../components/graph";
 import Temperature from "../components/temperature";
 import PH from "../components/ph";
 
-export default function HomeScreen() {
+export default function SensorPhSuhu() {
   return (
     <SafeAreaView style={styles.container}>
       <Graph />
