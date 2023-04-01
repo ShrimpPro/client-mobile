@@ -20,8 +20,9 @@ export default function WelcomeScreen({ navigation }) {
           }}
         />
         <Text
+          variant="headlineLarge"
           style={{
-            fontSize: 30,
+
             fontWeight: "bold",
             textAlign: "center",
             marginBottom: 15,
@@ -30,9 +31,9 @@ export default function WelcomeScreen({ navigation }) {
           ShrimpPro
         </Text>
         <Text
+          variant="bodyMedium"
           style={{
-            fontSize: 20,
-            fontWeight: "300",
+            fontFamily: "Poppins",
             textAlign: "justify",
           }}
         >
@@ -46,12 +47,14 @@ export default function WelcomeScreen({ navigation }) {
             flexDirection: "row",
             alignItems: "center",
             justifyContent: "center",
-            marginTop: 15,
+            marginTop: 20,
           }}
         >
           <Button
             mode="contained"
+            uppercase={true}
             style={{ borderRadius: 5 }}
+            labelStyle={{ fontFamily: "Poppins-Bold" }}
             onPress={() => {
               navigation.navigate("Login");
             }}
@@ -60,7 +63,12 @@ export default function WelcomeScreen({ navigation }) {
           </Button>
           <Button
             mode="contained"
-            style={{ borderRadius: 5, marginHorizontal: 10 }}
+            uppercase={true}
+            labelStyle={{ fontFamily: "Poppins-Bold" }}
+            style={{
+              borderRadius: 5,
+              marginHorizontal: 10,
+            }}
           >
             Penadah
           </Button>

@@ -1,8 +1,9 @@
 import { NavigationContainer } from "@react-navigation/native";
-import 'react-native-gesture-handler';
+import "react-native-gesture-handler";
 import { Provider } from "react-redux";
 import store from "./store";
 import {
+  configureFonts,
   MD3LightTheme as DefaultTheme,
   Provider as PaperProvider,
 } from "react-native-paper";
@@ -11,26 +12,38 @@ import { useFonts } from "expo-font";
 import MainStack from "./navigators/MainStack";
 
 export default function App() {
-  const lightTheme = {
-    ...DefaultTheme,
-    ...blueTheme,
+  const [loaded] = useFonts({
+    Poppins: require("./assets/fonts/Poppins-Regular.ttf"),
+    "Poppins-Bold": require("./assets/fonts/Poppins-Bold.ttf"),
+  });
+
+  const fontConfig = {
+    default: {
+      regular: {
+        fontFamily: "Poppins",
+        fontWeight: "normal",
+      },
+      bold: {
+        fontFamily: "Poppins-Bold",
+        fontWeight: "normal",
+      },
+    },
   };
 
-  const darkTheme = {
+  const theme = {
     ...DefaultTheme,
     ...blueTheme,
-    dark: true,
+    fonts: configureFonts({ fonts: fontConfig }),
   };
 
-  // let [fontsLoaded] = useFonts({
-  //   "Poppins-Black": require("./assets/fonts/P"),
-  // });
+  if (!loaded) {
+    return null;
+  }
 
-  // if (fontsLoaded) {
   return (
     <Provider store={store}>
-      <PaperProvider theme={lightTheme}>
-        <NavigationContainer>
+      <PaperProvider theme={theme}>
+        <NavigationContainer theme={theme}>
           <MainStack />
         </NavigationContainer>
       </PaperProvider>
