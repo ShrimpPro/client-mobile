@@ -2,15 +2,22 @@ import { StyleSheet, Image, View } from "react-native";
 import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { TextInput, HelperText, Button, Text } from "react-native-paper";
+import { useDispatch } from "react-redux";
+import { postLogin } from "./store/actions/actionCreator";
 
 export default function LoginScreen() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState(false);
+  const dispatch = useDispatch();
+  const [inputLogin, setInputLogin] = useState({
+    username: "",
+    password: "",
+  });
 
-  const handleLogin = () => {
-    console.log("login api");
-    setError(true);
+  const changeInput = (key, value) => {
+    let newInput = {
+      ...inputLogin,
+    };
+    newInput[key] = value;
+    setInputLogin(newInput);
   };
 
   return (
@@ -30,24 +37,24 @@ export default function LoginScreen() {
       </HelperText>
       <TextInput
         label="Username"
-        value={username}
+        value={inputLogin.username}
         mode="outlined"
-        onChangeText={(value) => setUsername(value)}
+        onChangeText={(value) => changeInput("username", value)}
         style={{ marginBottom: 10 }}
       />
       <TextInput
         label="Password"
-        value={password}
+        value={inputLogin.password}
         mode="outlined"
         secureTextEntry={true}
-        onChangeText={(value) => setPassword(value)}
+        onChangeText={(value) => changeInput("password", value)}
         style={{ marginBottom: 15 }}
       />
 
       <Button
         mode="contained"
         uppercase={true}
-        onPress={handleLogin}
+        onPress={() => dispatch(postLogin(inputLogin))}
         style={styles.button}
       >
         Login
