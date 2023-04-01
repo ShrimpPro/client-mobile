@@ -3,7 +3,7 @@ import TabNavigator from "./navigators/TabNavigator";
 import LoginScreen from "./screens/LoginScreen";
 import RegisterScreen from "./screens/RegisterScreen";
 import { Provider } from "react-redux";
-import store from "./screens/store";
+import store from "./store";
 
 export default function App() {
   return (

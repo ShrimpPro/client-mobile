@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { TextInput, HelperText, Button, Text } from "react-native-paper";
 import { useDispatch } from "react-redux";
-import { postLogin } from "./store/actions/actionCreator";
+import { postLogin } from "../store/actions/actionCreator";
 
 export default function LoginScreen() {
   const dispatch = useDispatch();

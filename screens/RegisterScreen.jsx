@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { TextInput, Switch, Button, Text } from "react-native-paper";
 import * as Font from "expo-font";
-import { postRegister } from "./store/actions/actionCreator";
+import { postRegister } from "../store/actions/actionCreator";
 import { useDispatch } from "react-redux";
 
 export default function RegisterScreen() {
