@@ -1,10 +1,53 @@
-import { NavigationContainer } from '@react-navigation/native';
-import TabNavigator from './navigators/TabNavigator';
+import { NavigationContainer } from "@react-navigation/native";
+import "react-native-gesture-handler";
+import { Provider } from "react-redux";
+import store from "./store";
+import {
+  configureFonts,
+  MD3LightTheme as DefaultTheme,
+  Provider as PaperProvider,
+} from "react-native-paper";
+import blueTheme from "./assets/colors";
+import { useFonts } from "expo-font";
+import MainStack from "./navigators/MainStack";
 
 export default function App() {
+  const [loaded] = useFonts({
+    Poppins: require("./assets/fonts/Poppins-Regular.ttf"),
+    "Poppins-Bold": require("./assets/fonts/Poppins-Bold.ttf"),
+  });
+
+  const fontConfig = {
+    default: {
+      regular: {
+        fontFamily: "Poppins",
+        fontWeight: "normal",
+      },
+      bold: {
+        fontFamily: "Poppins-Bold",
+        fontWeight: "normal",
+      },
+    },
+  };
+
+  const theme = {
+    ...DefaultTheme,
+    ...blueTheme,
+    fonts: configureFonts({ fonts: fontConfig }),
+  };
+
+  if (!loaded) {
+    return null;
+  }
+
   return (
-    <NavigationContainer>
-      <TabNavigator />
-    </NavigationContainer>
+    <Provider store={store}>
+      <PaperProvider theme={theme}>
+        <NavigationContainer theme={theme}>
+          <MainStack />
+        </NavigationContainer>
+      </PaperProvider>
+    </Provider>
   );
+  // }
 }
