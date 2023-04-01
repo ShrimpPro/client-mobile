@@ -6,14 +6,14 @@ import * as Font from "expo-font";
 import { postRegister } from "../store/actions/actionCreator";
 import { useDispatch } from "react-redux";
 
-export default function RegisterScreen() {
+export default function RegisterScreen({navigation}) {
   const dispatch = useDispatch();
   const [inputRegister, setInputRegister] = useState({
     username: "",
     password: "",
     phoneNumber: "",
     address: "",
-    devices: 0,
+    devices: "",
     subscribed: false,
   });
 

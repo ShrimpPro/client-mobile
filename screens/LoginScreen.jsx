@@ -5,7 +5,7 @@ import { TextInput, HelperText, Button, Text } from "react-native-paper";
 import { useDispatch } from "react-redux";
 import { postLogin } from "../store/actions/actionCreator";
 
-export default function LoginScreen() {
+export default function LoginScreen({ navigation }) {
   const dispatch = useDispatch();
   const [inputLogin, setInputLogin] = useState({
     username: "",
@@ -28,13 +28,13 @@ export default function LoginScreen() {
           uri: "https://cdn.discordapp.com/attachments/1089065643346776075/1090570170487025754/20230329_163617_0000.png",
         }}
       />
-      <HelperText
+      {/* <HelperText
         style={{ marginBottom: 15, alignSelf: "center" }}
         type="error"
         visible={error}
       >
         Error on API response
-      </HelperText>
+      </HelperText> */}
       <TextInput
         label="Username"
         value={inputLogin.username}
@@ -54,14 +54,24 @@ export default function LoginScreen() {
       <Button
         mode="contained"
         uppercase={true}
-        onPress={() => dispatch(postLogin(inputLogin))}
+        onPress={() => {
+          dispatch(postLogin(inputLogin));
+          navigation.navigate("Dashboard");
+        }}
         style={styles.button}
       >
         Login
       </Button>
       <View style={styles.row}>
         <Text style={{ paddingRight: 5 }}>Dont have an account?</Text>
-        <Text style={styles.register}>Register here</Text>
+        <Text
+          style={styles.register}
+          onPress={() => {
+            navigation.navigate("Register");
+          }}
+        >
+          Register here
+        </Text>
       </View>
     </SafeAreaView>
   );
