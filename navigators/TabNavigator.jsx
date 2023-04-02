@@ -3,9 +3,10 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { BottomNavigation } from "react-native-paper";
 import HarvestScreen from "../screens/HarvestScreen";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import SensorPhSuhu from "../screens/wireFrame6-7";
+import SensorPhSuhu from "../screens/sensorphsuhu";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import SettingsScreen from "../screens/SettingsScreen";
+import DetailMitra from "../screens/DetailMitra";
 
 const Tab = createBottomTabNavigator();
 
