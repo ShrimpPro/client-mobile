@@ -1,30 +1,29 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View } from "react-native";
 
-export default function Temperature() {
-  const [temperature, setTemperature] = useState(24);
+export default function Temperature({ temp }) {
   const [circleColor, setCircleColor] = useState("#4e79a7");
 
   useEffect(() => {
     let color;
-    if (temperature >= 21 && temperature <= 25) {
+    if (temp >= 21 && temp <= 25) {
       color = "#25aff3";
-    } else if (temperature >= 0 && temperature <= 20) {
+    } else if (temp >= 0 && temp <= 20) {
       color = "#0255fa";
-    } else if (temperature >= 65 && temperature <= 79) {
+    } else if (temp >= 65 && temp <= 79) {
       color = "#ffa500";
-    } else if (temperature >= 80) {
+    } else if (temp >= 80) {
       color = "#ff0303";
     } else {
       color = "#00ff00";
     }
     setCircleColor(color);
-  }, [temperature]);
+  }, [temp]);
 
   return (
     <View style={styles.container}>
       <View style={[styles.circle, { backgroundColor: circleColor }]}>
-        <Text style={styles.text}>{temperature}°C</Text>
+        <Text style={styles.text}>{temp}°C</Text>
       </View>
     </View>
   );
