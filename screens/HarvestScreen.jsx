@@ -3,8 +3,9 @@ import React, { useEffect } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import HarvestCard from "../components/HarvestCard";
 import { Button, Card, Text } from "react-native-paper";
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from "react-redux";
 import { fetchPonds } from "../store/actions/actionPond";
+import GraphPanen from "../components/GraphListPanen";
 
 const harvestData = [
   {
@@ -80,15 +81,14 @@ const harvestData = [
 ];
 
 export default function HarvestScreen() {
-  const { ponds, loading } = useSelector(state => state.ponds);
+  const { ponds, loading } = useSelector((state) => state.ponds);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchPonds())
       .then(() => console.log(ponds, loading))
-      .catch(err => console.log(err));
-  }, [])
-  
+      .catch((err) => console.log(err));
+  }, []);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -104,6 +104,9 @@ export default function HarvestScreen() {
       >
         Tambah Panen
       </Button>
+      <View style={styles.graphContainer}>
+        <GraphPanen />
+      </View>
       <View style={styles.contentContainer}>
         <FlatList
           showsVerticalScrollIndicator={false}
@@ -124,12 +127,16 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   headerContainer: {
-    marginVertical: 10,
+    marginVertical: 6,
   },
   textHeader: {
     textAlign: "center",
   },
   contentContainer: {
+    marginTop: 160,
+    paddingBottom: 80,
+  },
+  graphContainer: {
     marginTop: 10,
     paddingBottom: 80,
   },

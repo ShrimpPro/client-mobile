@@ -33,7 +33,7 @@ export default function PH() {
 const styles = StyleSheet.create({
   container: {
     position: "absolute",
-    bottom: 245,
+    bottom: 190,
     left: 207,
     flexDirection: "row",
     alignItems: "center",
