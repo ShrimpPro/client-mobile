@@ -6,9 +6,11 @@ import { Button, Card, Text } from "react-native-paper";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchPonds } from "../store/actions/actionPond";
 import GraphPanen from "../components/GraphListPanen";
+import SelectPond from "../components/SelectPond";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 export default function HarvestScreen({navigation}) {
-  const { ponds, loading } = useSelector((state) => state.ponds);
+  const { pond, loading } = useSelector((state) => state.ponds);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -18,31 +20,36 @@ export default function HarvestScreen({navigation}) {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.headerContainer}>
-        <Text variant="headlineMedium" style={styles.textHeader}>
-          List Panen
-        </Text>
-      </View>
-      <Button
-        icon="check"
-        mode="contained"
-        onPress={() => navigation.navigate("Tambah Panen")}
-      >
-        Tambah Panen
-      </Button>
-      <View style={styles.graphContainer}>
-        <GraphPanen />
-      </View>
-      <View style={styles.contentContainer}>
-        <FlatList
-          showsVerticalScrollIndicator={false}
-          data={ponds[2]?.harvests}
-          keyExtractor={(data) => data._id}
-          renderItem={({ item }) => {
-            return <HarvestCard data={item} />;
-          }}
-        />
-      </View>
+      {
+        loading ? <LoadingSpinner /> : <>
+          <SelectPond />
+          <View style={styles.headerContainer}>
+            <Text variant="headlineMedium" style={styles.textHeader}>
+              List Panen
+            </Text>
+          </View>
+          <Button
+            icon="check"
+            mode="contained"
+            onPress={() => navigation.navigate("Tambah Panen")}
+          >
+            Tambah Panen
+          </Button>
+          <View style={styles.graphContainer}>
+            <GraphPanen />
+          </View>
+          <View style={styles.contentContainer}>
+            <FlatList
+              showsVerticalScrollIndicator={false}
+              data={pond?.harvests}
+              keyExtractor={(data) => data._id}
+              renderItem={({ item }) => {
+                return <HarvestCard data={item} />;
+              }}
+            />
+          </View>
+        </>
+      }
     </SafeAreaView>
   );
 }

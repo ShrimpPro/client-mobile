@@ -1,27 +1,34 @@
-import { ScrollView, StyleSheet, Text } from "react-native";
-import React, { useEffect } from "react";
+import { View, StyleSheet, Text } from "react-native";
+import React, { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Graph from "../components/graph";
 import Temperature from "../components/temperature";
 import PH from "../components/ph";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchPonds } from "../store/actions/actionPond";
+import { fetchPondDetail, fetchPonds } from "../store/actions/actionPond";
 import LoadingSpinner from "../components/LoadingSpinner";
+import SelectPond from "../components/SelectPond";
 
 export default function SensorPhSuhu() {
-  const { ponds, loading } = useSelector((state) => state.ponds);
-  const [ a, b, pond ] = ponds;
+  const [loading, setLoading] = useState(false);
+  const { pond, loading: pondLoading } = useSelector((state) => state.ponds);
   const dispatch = useDispatch();
 
   useEffect(() => {
+    setLoading(true);
     dispatch(fetchPonds())
+      .then(ponds => dispatch(fetchPondDetail(ponds[0]?._id)))
+      .then(() => {
+        setLoading(false);
+      })
       .catch((err) => console.log(err));
   }, []);
 
   return (
     <SafeAreaView style={styles.container}>
       {
-        loading ? <LoadingSpinner /> : <>
+        loading || pondLoading ? <LoadingSpinner /> : <>
+          <SelectPond />
           <Graph histories={pond?.histories} />
           <PH pH={pond?.pH} />
           <Temperature temp={pond?.temp} />
@@ -36,5 +43,5 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-  },
+  }
 });
