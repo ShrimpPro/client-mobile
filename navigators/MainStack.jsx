@@ -5,6 +5,7 @@ import TabNavigator from "./TabNavigator";
 const Stack = createNativeStackNavigator();
 import { useTheme } from "@react-navigation/native";
 import WelcomeScreen from "../screens/WelcomeScreen";
+import AddHarvestScreen from "../screens/AddHarvestScreen";
 
 export default function MainStack() {
   const { colors } = useTheme();
@@ -19,6 +20,7 @@ export default function MainStack() {
       <Stack.Screen name="Login" component={LoginScreen} />
       <Stack.Screen name="Register" component={RegisterScreen} />
       <Stack.Screen name="Dashboard" component={TabNavigator} />
+      <Stack.Screen name="Tambah Panen" component={AddHarvestScreen} />
     </Stack.Navigator>
   );
 }
