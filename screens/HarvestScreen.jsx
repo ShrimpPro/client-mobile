@@ -1,8 +1,10 @@
 import { FlatList, StyleSheet, View } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import HarvestCard from "../components/HarvestCard";
 import { Button, Card, Text } from "react-native-paper";
+import { useSelector, useDispatch } from 'react-redux'
+import { fetchPonds } from "../store/actions/actionPond";
 
 const harvestData = [
   {
@@ -78,6 +80,16 @@ const harvestData = [
 ];
 
 export default function HarvestScreen() {
+  const { ponds, loading } = useSelector(state => state.ponds);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchPonds())
+      .then(() => console.log(ponds, loading))
+      .catch(err => console.log(err));
+  }, [])
+  
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.headerContainer}>

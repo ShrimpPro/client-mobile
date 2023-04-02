@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { TextInput, Switch, Button, Text } from "react-native-paper";
 import * as Font from "expo-font";
-import { postRegister } from "../store/actions/actionCreator";
+import { postRegister } from "../store/actions/actionUser";
 import { useDispatch } from "react-redux";
 
 export default function RegisterScreen({navigation}) {
@@ -26,7 +26,7 @@ export default function RegisterScreen({navigation}) {
   };
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       {/* <Image
         style={styles.logo}
         source={{
@@ -109,7 +109,7 @@ export default function RegisterScreen({navigation}) {
       >
         Register
       </Button>
-    </View>
+    </SafeAreaView>
   );
 }
 

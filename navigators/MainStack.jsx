@@ -8,7 +8,7 @@ import WelcomeScreen from "../screens/WelcomeScreen";
 
 export default function MainStack() {
   const { colors } = useTheme();
-
+  
   return (
     <Stack.Navigator initialRouteName="LandingPage">
       <Stack.Screen
