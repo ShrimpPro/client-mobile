@@ -1,8 +1,25 @@
 import { Button, Text } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { View, Image } from "react-native";
+import { useEffect, useState } from "react";
+import * as SecureStore from 'expo-secure-store';
 
 export default function WelcomeScreen({ navigation }) {
+  const [isLogin, setIsLogin] = useState(false);
+
+  useEffect(() => {
+    SecureStore.getItemAsync('access_token')
+      .then(access_token => {
+        console.log(access_token)
+        setIsLogin(true);
+      })
+  }, [])
+
+  const partnerButton = () => {
+    if (isLogin) return navigation.navigate("Dashboard");
+    navigation.navigate("Login");
+  }
+
   return (
     <SafeAreaView
       style={{ paddingHorizontal: 15, flex: 1, justifyContent: "center" }}
@@ -55,9 +72,7 @@ export default function WelcomeScreen({ navigation }) {
             uppercase={true}
             style={{ borderRadius: 5 }}
             labelStyle={{ fontFamily: "Poppins-Bold" }}
-            onPress={() => {
-              navigation.navigate("Login");
-            }}
+            onPress={() => partnerButton()}
           >
             Penambak
           </Button>

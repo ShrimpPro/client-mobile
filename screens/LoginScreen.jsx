@@ -1,15 +1,15 @@
 import { StyleSheet, Image, View } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { TextInput, HelperText, Button, Text } from "react-native-paper";
 import { useDispatch } from "react-redux";
-import { postLogin } from "../store/actions/actionCreator";
+import { postLogin } from "../store/actions/actionUser";
 import { useTheme } from "@react-navigation/native";
 
 export default function LoginScreen({ navigation }) {
   const dispatch = useDispatch();
   const [inputLogin, setInputLogin] = useState({
-    username: "",
+    email: "",
     password: "",
   });
 
@@ -48,6 +48,17 @@ export default function LoginScreen({ navigation }) {
     setInputLogin(newInput);
   };
 
+  const loginHandler = (inputLogin) => {
+    dispatch(postLogin(inputLogin))
+      .then(() => {
+        navigation.navigate("Dashboard");
+        console.log('Logged In');
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={{ fontFamily: "Poppins" }}>
@@ -58,10 +69,10 @@ export default function LoginScreen({ navigation }) {
           }}
         />
         <TextInput
-          label="Username"
-          value={inputLogin.username}
+          label="email"
+          value={inputLogin.email}
           mode="outlined"
-          onChangeText={(value) => changeInput("username", value)}
+          onChangeText={(value) => changeInput("email", value)}
           style={{ marginBottom: 10, fontFamily: "Poppins" }}
         />
         <TextInput
@@ -76,10 +87,7 @@ export default function LoginScreen({ navigation }) {
         <Button
           mode="contained"
           uppercase={true}
-          onPress={() => {
-            dispatch(postLogin(inputLogin));
-            navigation.navigate("Dashboard");
-          }}
+          onPress={() => loginHandler(inputLogin)}
           style={styles.button}
           labelStyle={{ fontFamily: "Poppins-Bold" }}
         >

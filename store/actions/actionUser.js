@@ -1,3 +1,6 @@
+import axios from 'axios';
+import * as SecureStore from 'expo-secure-store';
+import { baseUrl } from "../../config/connection";
 import { CHANGE_LOGIN_RESPONSE, CHANGE_REGISTER_RESPONSE } from "./actionType";
 
 export const setLoginResponse = (payload) => {
@@ -10,10 +13,10 @@ export const setLoginResponse = (payload) => {
 export function postLogin(inputLogin) {
   return async (dispatch, getState) => {
     try {
-      console.log("login api");
-      console.log(inputLogin);
+      const { data } = await axios.post(baseUrl + 'users/login', inputLogin);
+      await SecureStore.setItemAsync('access_token', data.access_token);
     } catch (error) {
-      console.log(error);
+      throw error;
     }
   };
 }
