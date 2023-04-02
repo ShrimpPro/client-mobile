@@ -32,7 +32,7 @@ export default function PH({ pH }) {
 const styles = StyleSheet.create({
   container: {
     position: "absolute",
-    bottom: 190,
+    bottom: 90,
     left: 207,
     flexDirection: "row",
     alignItems: "center",

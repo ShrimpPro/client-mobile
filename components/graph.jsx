@@ -5,7 +5,7 @@ import { LineChart } from "react-native-chart-kit";
 export default function Graph({ histories }) {
   return (
     <View style={{ flex: 1 }}>
-      <ScrollView horizontal={true}>
+      <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
         <View>
           <Text variant="headlineMedium" style={styles.textHeader}>
             Grafik Suhu
