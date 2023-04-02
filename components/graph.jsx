@@ -1,25 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet, View, Text, Dimensions, ScrollView } from "react-native";
 import { LineChart } from "react-native-chart-kit";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchPonds } from "../store/actions/actionPond";
 
 export default function Graph() {
-  const [data1, setData1] = useState([
-    { suhu: 210 },
-    { suhu: 230 },
-    { suhu: 240 },
-    { suhu: 270 },
-    { suhu: 290 },
-    { suhu: 230 },
-    { suhu: 280 },
-  ]);
-  const [data2, setData2] = useState([
-    { suhu: 210 },
-    { suhu: 230 },
-    { suhu: 200 },
-    { suhu: 200 },
-    { suhu: 200 },
-    { suhu: 200 },
-  ]); // Data for the second chart
+  const { ponds } = useSelector((state) => state.ponds);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchPonds())
+      .catch((err) => console.log(err));
+  }, []);
 
   return (
     <View style={{ flex: 1 }}>
@@ -33,7 +25,7 @@ export default function Graph() {
               labels: ["January", "February", "March", "April", "May", "June"],
               datasets: [
                 {
-                  data: data1.map(({ suhu }) => suhu),
+                  data: ponds[2]?.histories.map(({ temp }) => temp),
                 },
               ],
             }}
@@ -74,7 +66,7 @@ export default function Graph() {
               labels: ["January", "February", "March", "April", "May", "June"],
               datasets: [
                 {
-                  data: data2.map(({ suhu }) => suhu),
+                  data: ponds[2]?.histories.map(({ pH }) => pH),
                 },
               ],
             }}

@@ -86,7 +86,6 @@ export default function HarvestScreen() {
 
   useEffect(() => {
     dispatch(fetchPonds())
-      .then(() => console.log(ponds, loading))
       .catch((err) => console.log(err));
   }, []);
 
@@ -110,8 +109,8 @@ export default function HarvestScreen() {
       <View style={styles.contentContainer}>
         <FlatList
           showsVerticalScrollIndicator={false}
-          data={harvestData}
-          keyExtractor={(data) => data.id}
+          data={ponds[2]?.harvests}
+          keyExtractor={(data) => data._id}
           renderItem={({ item }) => {
             return <HarvestCard data={item} />;
           }}
@@ -133,8 +132,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   contentContainer: {
-    marginTop: 160,
-    paddingBottom: 80,
+    marginTop: 160
   },
   graphContainer: {
     marginTop: 10,

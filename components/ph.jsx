@@ -1,30 +1,38 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchPonds } from "../store/actions/actionPond";
 
 export default function PH() {
-  const [ph, setPh] = useState(5.5);
+  const { ponds } = useSelector((state) => state.ponds);
+  const dispatch = useDispatch();
   const [circleColor, setCircleColor] = useState("#4e79a7");
 
   useEffect(() => {
+    dispatch(fetchPonds())
+      .catch((err) => console.log(err));
+  }, []);
+
+  useEffect(() => {
     let color;
-    if (ph >= 3 && ph <= 5) {
+    if (ponds[2]?.pH >= 3 && ponds[2]?.pH <= 5) {
       color = "#ffa500";
-    } else if (ph >= 0 && ph <= 2) {
+    } else if (ponds[2]?.pH >= 0 && ponds[2]?.pH <= 2) {
       color = "#ff0303";
-    } else if (ph >= 9 && ph <= 11) {
+    } else if (ponds[2]?.pH >= 9 && ponds[2]?.pH <= 11) {
       color = "#0255fa";
-    } else if (ph >= 12) {
+    } else if (ponds[2]?.pH >= 12) {
       color = "#482060";
     } else {
       color = "#008000";
     }
     setCircleColor(color);
-  }, [ph]);
+  }, [ponds[2]?.pH]);
 
   return (
     <View style={styles.container}>
       <View style={[styles.circle, { backgroundColor: circleColor }]}>
-        <Text style={styles.text}>{ph}pH</Text>
+        <Text style={styles.text}>{ponds[2]?.pH}pH</Text>
       </View>
     </View>
   );

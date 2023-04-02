@@ -1,30 +1,38 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchPonds } from "../store/actions/actionPond";
 
 export default function Temperature() {
-  const [temperature, setTemperature] = useState(24);
+  const { ponds } = useSelector((state) => state.ponds);
+  const dispatch = useDispatch();
   const [circleColor, setCircleColor] = useState("#4e79a7");
 
   useEffect(() => {
+    dispatch(fetchPonds())
+      .catch((err) => console.log(err));
+  }, []);
+
+  useEffect(() => {
     let color;
-    if (temperature >= 21 && temperature <= 25) {
+    if (ponds[2]?.temp >= 21 && ponds[2]?.temp <= 25) {
       color = "#25aff3";
-    } else if (temperature >= 0 && temperature <= 20) {
+    } else if (ponds[2]?.temp >= 0 && ponds[2]?.temp <= 20) {
       color = "#0255fa";
-    } else if (temperature >= 65 && temperature <= 79) {
+    } else if (ponds[2]?.temp >= 65 && ponds[2]?.temp <= 79) {
       color = "#ffa500";
-    } else if (temperature >= 80) {
+    } else if (ponds[2]?.temp >= 80) {
       color = "#ff0303";
     } else {
       color = "#00ff00";
     }
     setCircleColor(color);
-  }, [temperature]);
+  }, [ponds[2]?.temp]);
 
   return (
     <View style={styles.container}>
       <View style={[styles.circle, { backgroundColor: circleColor }]}>
-        <Text style={styles.text}>{temperature}°C</Text>
+        <Text style={styles.text}>{ponds[2]?.temp}°C</Text>
       </View>
     </View>
   );

@@ -1,6 +1,7 @@
 import { StyleSheet, View } from 'react-native'
 import React from 'react'
 import { Button, Card, Text } from 'react-native-paper';
+import { formatDate, formatMoney } from '../helpers';
 
 export default function HarvestCard({ data }) {
   return (
@@ -9,10 +10,11 @@ export default function HarvestCard({ data }) {
         <Card.Content>
           <View style={styles.dateContainer}>
             <Text variant="titleLarge">Panen </Text>
-            <Text variant="titleLarge">{data.date}</Text>
+            <Text variant="titleLarge">{formatDate(data.createdAt)}</Text>
           </View>
           <View style={styles.footerContainer}>
-            <Text variant="titleMedium">Berat: {data.weight}</Text>
+            <Text variant="titleMedium">Modal: {formatMoney(data.capital)}</Text>
+            <Text variant="titleMedium">Pendapatan: {formatMoney(data.earning)}</Text>
             <Text variant="titleMedium">Kualitas: {data.quality}</Text>
           </View>
         </Card.Content>
@@ -26,7 +28,9 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   card: {
-    backgroundColor: 'white'
+    backgroundColor: 'white',
+    borderColor: '#eee',
+    borderWidth: 1
   },
   dateContainer: {
     flexDirection: 'row',
