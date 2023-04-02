@@ -80,7 +80,7 @@ const harvestData = [
   },
 ];
 
-export default function HarvestScreen() {
+export default function HarvestScreen({navigation}) {
   const { ponds, loading } = useSelector((state) => state.ponds);
   const dispatch = useDispatch();
 
@@ -99,7 +99,7 @@ export default function HarvestScreen() {
       <Button
         icon="check"
         mode="contained"
-        onPress={() => console.log("Pressed")}
+        onPress={() => navigation.navigate("Tambah Panen")}
       >
         Tambah Panen
       </Button>
