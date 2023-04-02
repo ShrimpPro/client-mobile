@@ -7,6 +7,7 @@ import SensorPhSuhu from "../screens/sensorphsuhu";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import SettingsScreen from "../screens/SettingsScreen";
 import DetailMitra from "../screens/DetailMitra";
+import PenadahPage from "../screens/pagepenadah";
 
 const Tab = createBottomTabNavigator();
 
