@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchPondDetail, fetchPonds } from "../store/actions/actionPond";
 import LoadingSpinner from "../components/LoadingSpinner";
 import SelectPond from "../components/SelectPond";
+import NoDevice from "../components/NoDevice";
 
 export default function SensorPhSuhu() {
   const [loading, setLoading] = useState(false);
@@ -37,9 +38,7 @@ export default function SensorPhSuhu() {
               <Graph histories={pond?.histories} />
               <PH pH={pond?.pH} />
               <Temperature temp={pond?.temp} />
-            </> : <>
-              <Text>Buy device</Text>
-            </>
+            </> : <NoDevice />
           }
         </>
       }
