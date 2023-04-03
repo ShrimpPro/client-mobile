@@ -32,7 +32,7 @@ export default function HarvestScreen({ navigation }) {
             Tambah Panen
           </Button>
           <View style={styles.graphContainer}>
-            <GraphPanen />
+            <GraphPanen harvests={pond?.harvests}/>
           </View>
           <View style={styles.contentContainer}>
             <FlatList
