@@ -56,3 +56,10 @@ export const tempCategory = (temp) => {
   }
   return category;
 }
+
+export const pondCategory = (ponds) => {
+  if (ponds.length > 1) return 'Tambak besar';
+  return 'Tambak kecil'
+}
+
+export const capitalizeFirstLetter = (word) => word[0].toUpperCase() + word.slice(1);

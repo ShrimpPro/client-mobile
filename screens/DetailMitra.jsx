@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import {
   SafeAreaView,
@@ -10,15 +10,22 @@ import {
   Image,
 } from "react-native";
 import { Card } from "react-native-paper";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchUserDetail } from "../store/actions/actionUser";
+import { useRoute } from "@react-navigation/native";
+import LoadingSpinner from "../components/LoadingSpinner";
+import { capitalizeFirstLetter, pondCategory } from "../helpers";
 
-const images = [
-  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQThSwdOK63x8NyN6a1QKigWSvktFZ1hvnMxQ&usqp=CAU",
-  "https://radarbromo.jawapos.com/wp-content/uploads/2021/09/f-4-bangil-BOX-budidaya-udang-kolam-terpal.jpg",
-  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTK6IZyou_N1hq86yPvFL6UQA5v36z0eUpTw&usqp=CAU",
-];
-
-export default function DetailMitra({ navigation }) {
+export default function DetailMitra() {
   const [img, setImg] = useState(0);
+  const { user, loading } = useSelector((state) => state.users);
+  const dispatch = useDispatch();
+  const { id } = useRoute().params;
+
+  useEffect(() => {
+    dispatch(fetchUserDetail(id))
+      .catch((err) => console.log(err));
+  }, []);
 
   onchange = (nativeEvent) => {
     if (nativeEvent) {
@@ -32,65 +39,65 @@ export default function DetailMitra({ navigation }) {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <ScrollView>
-        <View style={{ marginTop: 50 }}>
-          <ScrollView
-            onScroll={({ nativeEvent }) => onchange(nativeEvent)}
-            showsHorizontalScrollIndicator={false}
-            pagingEnabled
-            horizontal
-          >
-            {images.map((e, index) => (
-              <Image
-                key={e}
-                resizeMode="stretch"
-                style={styles.wrap}
-                source={{ uri: e }}
-              />
-            ))}
-          </ScrollView>
-        </View>
-        <View style={styles.wrapdot}>
-          {images.map((e, index) => (
-            <Text key={e} style={img == index ? styles.dotActive : styles.dot}>
-              ●
-            </Text>
-          ))}
-        </View>
-        <View style={styles.contentContainer}>
-          <Card>
-            <Card.Content>
-              <View style={styles.tambakSection}>
-                <Text style={styles.title}>Jenis Tambak:</Text>
-                <Text style={styles.content}>jesin tambak</Text>
-              </View>
-              <View style={styles.panenSection}>
-                <Text style={styles.title}>Kapasitas Panen:</Text>
-                <Text style={styles.content}>kapasitas panens</Text>
-              </View>
-
-              <View style={styles.mitraSection}>
-                <Text style={styles.title}>Detail Entitas Mitra:</Text>
-                <Text style={styles.content}>
-                  Warna lightgray / Abu-abu Muda dengan kode warna heksadesimal
-                  #d3d3d3 adalah cahaya bayangan dari abu-abu. Dalam model warna
-                  RGB #d3d3d3 terdiri dari 82.75% merah, 82.75% hijau dan 82.75%
-                  biru. Di ruang warna HSL #d3d3d3 memiliki hue 0° (derajat), 0%
-                  saturasi dan 83% penerangan. Warna ini memiliki panjang
-                  gelombang sekitar 0 nm. Warna lightgray / Abu-abu Muda dengan
-                  kode warna heksadesimal #d3d3d3 adalah cahaya bayangan dari
-                  abu-abu. Dalam model warna RGB #d3d3d3 terdiri dari 82.75%
-                  merah, 82.75% hijau dan 82.75% biru. Di ruang warna HSL
-                  #d3d3d3 memiliki hue 0° (derajat), 0% saturasi dan 83%
-                  penerangan. Warna ini memiliki panjang gelombang sekitar 0 nm.
+    <>
+      {
+        loading ? <LoadingSpinner /> :
+        <>
+          <SafeAreaView style={styles.container}>
+            <View style={{ marginTop: 20 }}>
+              <ScrollView
+                onScroll={({ nativeEvent }) => onchange(nativeEvent)}
+                showsHorizontalScrollIndicator={false}
+                pagingEnabled
+                horizontal
+              >
+                {user?.images?.map((e, index) => (
+                  <Image
+                    key={e}
+                    resizeMode="stretch"
+                    style={styles.wrap}
+                    source={{ uri: e }}
+                  />
+                ))}
+              </ScrollView>
+            </View>
+            <View style={styles.wrapdot}>
+              {user?.images.map((e, index) => (
+                <Text key={e} style={img == index ? styles.dotActive : styles.dot}>
+                  ●
                 </Text>
-              </View>
-            </Card.Content>
-          </Card>
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+              ))}
+            </View>
+            <View style={styles.contentContainer}>
+              <Card>
+                <Card.Content>
+                  <View style={styles.dataContainer}>
+                    <Text style={styles.title}>Nama:</Text>
+                    <Text style={styles.content}>{user.name}</Text>
+                  </View>
+                  <View style={styles.dataContainer}>
+                    <Text style={styles.title}>Phone Number:</Text>
+                    <Text style={styles.content}>{user.phoneNumber}</Text>
+                  </View>
+                  <View style={styles.dataContainer}>
+                    <Text style={styles.title}>Address:</Text>
+                    <Text style={styles.content}>{user.address}</Text>
+                  </View>
+                  <View style={styles.dataContainer}>
+                    <Text style={styles.title}>Jenis Tambak:</Text>
+                    <Text style={styles.content}>{pondCategory(user.ponds)}</Text>
+                  </View>
+                  <View style={styles.dataContainer}>
+                    <Text style={styles.title}>Membership:</Text>
+                    <Text style={styles.content}>{capitalizeFirstLetter(user.membership)}</Text>
+                  </View>
+                </Card.Content>
+              </Card>
+            </View>
+          </SafeAreaView>
+        </>
+      }
+    </>
   );
 }
 
@@ -123,10 +130,7 @@ const styles = StyleSheet.create({
     fontSize: 25,
     marginTop: 60,
   },
-  tambakSection: {
-    marginBottom: 20,
-  },
-  panenSection: {
+  dataContainer: {
     marginBottom: 20,
   },
   title: {

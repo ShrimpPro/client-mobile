@@ -6,6 +6,7 @@ import {
   CHANGE_LOGIN_RESPONSE,
   CHANGE_REGISTER_RESPONSE,
   FETCH_USERS,
+  FETCH_USER_DETAIL,
 } from "./actionType";
 
 export const setLoginResponse = (payload) => {
@@ -52,6 +53,20 @@ export const fetchUsers = () => {
       dispatch({ type: FETCH_USERS, payload: users });
       dispatch({ type: CHANGE_LOADING_USERS, payload: false });
       return users;
+    } catch (error) {
+      throw error;
+    }
+  };
+};
+
+export const fetchUserDetail = (id) => {
+  return async (dispatch, getState) => {
+    try {
+      dispatch({ type: CHANGE_LOADING_USERS, payload: true });
+      const { data: user } = await axios.get(baseUrl + "users/" + id);
+      dispatch({ type: FETCH_USER_DETAIL, payload: user });
+      dispatch({ type: CHANGE_LOADING_USERS, payload: false });
+      return user;
     } catch (error) {
       throw error;
     }

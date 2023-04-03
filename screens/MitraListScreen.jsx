@@ -63,29 +63,30 @@ const harvestData = [
 ];
 
 export default function MitraListScreen({ navigation }) {
-  const { user, loading } = useSelector((state) => state.users);
+  const { users, loading } = useSelector((state) => state.users);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchUsers())
-      .then(() => console.log(user, loading))
       .catch((err) => console.log(err));
   }, []);
 
   return (
     <SafeAreaView style={styles.container}>
-      {loading ? <LoadingSpinner /> : <></>}
-
-      <View>
-        <FlatList
-          showsVerticalScrollIndicator={false}
-          data={harvestData}
-          keyExtractor={(data) => data.id}
-          renderItem={({ item }) => {
-            return <MitraCard data={item} navigation={navigation} />;
-          }}
-        />
-      </View>
+      {
+        loading ? <LoadingSpinner /> : <>
+          <View>
+            <FlatList
+              showsVerticalScrollIndicator={false}
+              data={users}
+              keyExtractor={(data) => data._id}
+              renderItem={({ item }) => {
+                return item.membership ? <MitraCard data={item} navigation={navigation} /> : <></>;
+              }}
+            />
+          </View>
+        </>
+      }
     </SafeAreaView>
   );
 }
