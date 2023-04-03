@@ -23,7 +23,6 @@ export const fetchPonds = () => {
 export const fetchPondDetail = (id) => {
   return async (dispatch, getState) => {
     try {
-      console.log(id);
       dispatch({ type: CHANGE_LOADING_PONDS, payload: true });
       const access_token = await SecureStore.getItemAsync('access_token');
       const { data: pond } = await axios.get(baseUrl + 'partners/ponds/' + id, {
@@ -32,6 +31,21 @@ export const fetchPondDetail = (id) => {
       dispatch({ type: FETCH_POND_DETAIL, payload: pond });
       dispatch({ type: CHANGE_LOADING_PONDS, payload: false });
       return pond;
+    } catch (error) {
+      throw error;
+    }
+  }
+}
+
+export const createHarvest = (inputHarvest, pondId) => {
+  return async (dispatch, getState) => {
+    try {
+      const access_token = await SecureStore.getItemAsync('access_token');
+      const { data: harvest } = await axios.post(baseUrl + 'partners/harvests/' + pondId, inputHarvest, {
+        headers: { access_token }
+      })
+      dispatch(fetchPondDetail(pondId));
+      return harvest;
     } catch (error) {
       throw error;
     }
