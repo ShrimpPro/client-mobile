@@ -2,14 +2,9 @@ import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { BottomNavigation } from "react-native-paper";
 import HarvestScreen from "../screens/HarvestScreen";
-import Ionicons from "react-native-vector-icons/Ionicons";
 import SensorPhSuhu from "../screens/sensorphsuhu";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import SettingsScreen from "../screens/SettingsScreen";
-import DetailMitra from "../screens/DetailMitra";
-import PenadahPage from "../screens/MitraListScreen";
-import PenadahPage from "../screens/pagepenadah";
-import ScreenHistoryPh from "../screens/screenhistoryPh";
 import HistoryScreen from "../screens/HistoryScreen";
 
 const Tab = createBottomTabNavigator();

@@ -3,15 +3,12 @@ import LoginScreen from "../screens/LoginScreen";
 import RegisterScreen from "../screens/RegisterScreen";
 import TabNavigator from "./TabNavigator";
 const Stack = createNativeStackNavigator();
-import { useTheme } from "@react-navigation/native";
 import WelcomeScreen from "../screens/WelcomeScreen";
 import DetailMitra from "../screens/DetailMitra";
 import MitraListScreen from "../screens/MitraListScreen";
 import AddHarvestScreen from "../screens/AddHarvestScreen";
 
 export default function MainStack() {
-  const { colors } = useTheme();
-
   return (
     <Stack.Navigator initialRouteName="LandingPage">
       <Stack.Screen
