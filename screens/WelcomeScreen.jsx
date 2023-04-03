@@ -1,4 +1,4 @@
-import { Button, Text } from "react-native-paper";
+import { Button, IconButton, Text } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { View, Image } from "react-native";
 import { useEffect, useState } from "react";
@@ -9,8 +9,7 @@ export default function WelcomeScreen({ navigation }) {
 
   useEffect(() => {
     SecureStore.getItemAsync("access_token").then((access_token) => {
-      console.log(access_token);
-      setIsLogin(true);
+      if (access_token) setIsLogin(true);
     });
   }, []);
 
@@ -18,6 +17,7 @@ export default function WelcomeScreen({ navigation }) {
     if (isLogin) return navigation.navigate("Dashboard");
     navigation.navigate("Login");
   };
+
   const penadahButton = () => {
     navigation.navigate("List Mitra");
   };

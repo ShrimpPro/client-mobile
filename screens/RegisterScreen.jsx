@@ -6,15 +6,14 @@ import * as Font from "expo-font";
 import { postRegister } from "../store/actions/actionUser";
 import { useDispatch } from "react-redux";
 
-export default function RegisterScreen({navigation}) {
+export default function RegisterScreen({ navigation }) {
   const dispatch = useDispatch();
   const [inputRegister, setInputRegister] = useState({
-    username: "",
+    email: "",
     password: "",
     phoneNumber: "",
     address: "",
-    devices: "",
-    subscribed: false,
+    name: "",
   });
 
   const changeInput = (key, value) => {
@@ -25,22 +24,39 @@ export default function RegisterScreen({navigation}) {
     setInputRegister(newInput);
   };
 
+  const registerHandler = () => {
+    dispatch(postRegister(inputRegister))
+      .then(() => navigation.navigate('Login'))
+      .catch(err => console.log(err));
+  }
+
   return (
     <SafeAreaView style={styles.container}>
-      <Text
-        style={{
-          fontFamily: Font["Poppins"],
-        }}
-      >
-        Register
-      </Text>
+      <Image
+          style={{
+            alignSelf: "center",
+            width: 300,
+            height: 200,
+            marginBottom: 50,
+          }}
+          source={{
+            uri: "https://cdn.discordapp.com/attachments/1089065643346776075/1090570170487025754/20230329_163617_0000.png",
+          }}
+        />
       <TextInput
-        nativeID="username"
-        label="Username"
-        value={inputRegister.username}
+        label="Name"
+        value={inputRegister.name}
         mode="outlined"
-        onChangeText={(value) => changeInput("username", value)}
-        style={{ marginBottom: 10 }}
+        onChangeText={(value) => changeInput("name", value)}
+        style={{ marginBottom: 20 }}
+      />
+      <TextInput
+        nativeID="email"
+        label="Email"
+        value={inputRegister.email}
+        mode="outlined"
+        onChangeText={(value) => changeInput("email", value)}
+        style={{ marginBottom: 20 }}
       />
       <TextInput
         label="Password"
@@ -48,50 +64,27 @@ export default function RegisterScreen({navigation}) {
         mode="outlined"
         secureTextEntry={true}
         onChangeText={(value) => changeInput("password", value)}
-        style={{ marginBottom: 15 }}
+        style={{ marginBottom: 20 }}
       />
       <TextInput
         label="Phone Numnber"
         value={inputRegister.phoneNumber}
         mode="outlined"
-        secureTextEntry={true}
         onChangeText={(value) => changeInput("phoneNumber", value)}
-        style={{ marginBottom: 15 }}
+        style={{ marginBottom: 20 }}
       />
       <TextInput
         label="Address"
         value={inputRegister.address}
         mode="outlined"
-        secureTextEntry={true}
         onChangeText={(value) => changeInput("address", value)}
-        style={{ marginBottom: 15 }}
+        style={{ marginBottom: 30 }}
       />
-
-      <TextInput
-        label="Jumlah device"
-        value={inputRegister.devices}
-        mode="outlined"
-        secureTextEntry={true}
-        onChangeText={(value) => changeInput("devices", value)}
-        style={{ marginBottom: 15 }}
-      />
-
-      <View style={{ flexDirection: "row", marginBottom: 15 }}>
-        <View style={{ marginLeft: "auto" }}>
-          <View style={{ flexDirection: "row" }}>
-            <Text style={{ padding: 8 }}>Subscribed</Text>
-            <Switch
-              value={inputRegister.subscribed}
-              onValueChange={(value) => changeInput("subscribed", value)}
-            />
-          </View>
-        </View>
-      </View>
 
       <Button
         mode="contained"
         uppercase={true}
-        onPress={() => dispatch(postRegister(inputRegister))}
+        onPress={() => registerHandler()}
         style={styles.button}
       >
         Register
