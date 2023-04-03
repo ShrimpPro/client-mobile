@@ -9,13 +9,15 @@ import GraphPanen from "../components/GraphListPanen";
 import SelectPond from "../components/SelectPond";
 import LoadingSpinner from "../components/LoadingSpinner";
 
-export default function HarvestScreen({navigation}) {
+export default function HarvestScreen({ navigation }) {
   const { pond, loading } = useSelector((state) => state.ponds);
 
   return (
     <SafeAreaView style={styles.container}>
-      {
-        loading ? <LoadingSpinner /> : <>
+      {loading ? (
+        <LoadingSpinner />
+      ) : (
+        <>
           <SelectPond />
           <View style={styles.headerContainer}>
             <Text variant="headlineMedium" style={styles.textHeader}>
@@ -43,7 +45,7 @@ export default function HarvestScreen({navigation}) {
             />
           </View>
         </>
-      }
+      )}
     </SafeAreaView>
   );
 }
@@ -60,7 +62,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   contentContainer: {
-    marginTop: 160
+    marginTop: 160,
   },
   graphContainer: {
     marginTop: 10,

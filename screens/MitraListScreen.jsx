@@ -5,7 +5,9 @@ import HarvestCard from "../components/HarvestCard";
 import { Button, Card, Text } from "react-native-paper";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchPonds } from "../store/actions/actionPond";
-import MitraCard from "../components/cardmitra";
+import MitraCard from "../components/MitraCard";
+import { fetchUsers } from "../store/actions/actionUser";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 const harvestData = [
   {
@@ -60,25 +62,21 @@ const harvestData = [
   },
 ];
 
-export default function ListMitra({ navigation }) {
-  const { ponds, loading } = useSelector((state) => state.ponds);
+export default function MitraListScreen({ navigation }) {
+  const { user, loading } = useSelector((state) => state.users);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchPonds())
-      .then(() => console.log(ponds, loading))
+    dispatch(fetchUsers())
+      .then(() => console.log(user, loading))
       .catch((err) => console.log(err));
   }, []);
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.headerContainer}>
-        <Text variant="headlineMedium" style={styles.textHeader}>
-          page Khusus penadah
-        </Text>
-      </View>
+      {loading ? <LoadingSpinner /> : <></>}
 
-      <View style={styles.contentContainer}>
+      <View>
         <FlatList
           showsVerticalScrollIndicator={false}
           data={harvestData}
@@ -95,19 +93,6 @@ export default function ListMitra({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 10,
-  },
-  headerContainer: {
-    marginVertical: 6,
-  },
-  textHeader: {
-    textAlign: "center",
-  },
-  contentContainer: {
-    paddingBottom: 80,
-  },
-  graphContainer: {
-    marginTop: 10,
-    paddingBottom: 80,
+    paddingHorizontal: 10,
   },
 });

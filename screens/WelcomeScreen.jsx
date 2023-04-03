@@ -19,7 +19,7 @@ export default function WelcomeScreen({ navigation }) {
     navigation.navigate("Login");
   };
   const penadahButton = () => {
-    navigation.navigate("ListMitra");
+    navigation.navigate("List Mitra");
   };
 
   return (
