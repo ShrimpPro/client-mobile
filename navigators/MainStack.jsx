@@ -7,6 +7,7 @@ import { useTheme } from "@react-navigation/native";
 import WelcomeScreen from "../screens/WelcomeScreen";
 import DetailMitra from "../screens/DetailMitra";
 import ListMitra from "../screens/pagepenadah";
+import AddHarvestScreen from "../screens/AddHarvestScreen";
 
 export default function MainStack() {
   const { colors } = useTheme();
@@ -23,6 +24,7 @@ export default function MainStack() {
       <Stack.Screen name="Dashboard" component={TabNavigator} />
       <Stack.Screen name="DetailMitra" component={DetailMitra} />
       <Stack.Screen name="ListMitra" component={ListMitra} />
+      <Stack.Screen name="Tambah Panen" component={AddHarvestScreen} />
     </Stack.Navigator>
   );
 }
