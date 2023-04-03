@@ -63,3 +63,33 @@ export const pondCategory = (ponds) => {
 }
 
 export const capitalizeFirstLetter = (word) => word[0].toUpperCase() + word.slice(1);
+
+export const dateToHours = (date) => date.split('T')[1].split('.')[0].slice(0, -3);
+export const dateToMonth = (date) => {
+  const day = date.getDate().toString().padStart(2, '0');
+  const month = (date.getMonth() + 1).toString().padStart(2, '0');
+  return `${day}/${month}`;
+}
+
+export const historyDates = (histories) => {
+  const dates = [];
+  histories?.forEach(el => {
+    dates.push(dateToHours(el.createdAt));
+  })
+  return dates;
+}
+
+export const netProfit = (capital, earning) => earning - capital;
+export const profitPerMillion = (profit) => {
+  const result = (profit / 1000000);
+  return result;
+}
+
+export const harvestDates = (harvests) => {
+  const dates = [];
+  harvests?.forEach(el => {
+    const date = new Date(el.createdAt);
+    dates.push(dateToMonth(date));
+  })
+  return dates;
+}

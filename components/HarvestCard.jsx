@@ -1,7 +1,7 @@
 import { StyleSheet, View } from 'react-native'
 import React from 'react'
 import { Button, Card, Text } from 'react-native-paper';
-import { formatDate, formatMoney } from '../helpers';
+import { formatDate, formatMoney, netProfit } from '../helpers';
 
 export default function HarvestCard({ data }) {
   return (
@@ -13,8 +13,7 @@ export default function HarvestCard({ data }) {
             <Text variant="titleLarge">{formatDate(data.createdAt)}</Text>
           </View>
           <View style={styles.footerContainer}>
-            <Text variant="titleMedium">Modal: {formatMoney(data.capital)}</Text>
-            <Text variant="titleMedium">Pendapatan: {formatMoney(data.earning)}</Text>
+            <Text variant="titleMedium">Laba Bersih: {formatMoney(netProfit(data.capital, data.earning))}</Text>
             <Text variant="titleMedium">Kualitas: {data.quality}</Text>
           </View>
         </Card.Content>

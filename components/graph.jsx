@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { StyleSheet, View, Text, Dimensions, ScrollView } from "react-native";
+import React from "react";
+import { StyleSheet, View, Text, ScrollView } from "react-native";
 import { LineChart } from "react-native-chart-kit";
+import { historyDates } from "../helpers";
 
 export default function Graph({ histories }) {
   return (
@@ -15,7 +16,7 @@ export default function Graph({ histories }) {
             <>
               <LineChart
                 data={{
-                  labels: ["January", "February", "March", "April", "May", "June"],
+                  labels: historyDates(histories),
                   datasets: [
                     {
                       data: histories.map(({ temp }) => temp),
@@ -61,7 +62,7 @@ export default function Graph({ histories }) {
             <>
               <LineChart
                 data={{
-                  labels: ["January", "February", "March", "April", "May", "June"],
+                  labels: historyDates(histories),
                   datasets: [
                     {
                       data: histories.map(({ pH }) => pH),
