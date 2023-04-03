@@ -9,3 +9,6 @@ export const FETCH_HARVEST_DETAIL = 'harvest-detail/fetch';
 export const FETCH_USERS = 'user/fetch';
 export const CHANGE_LOADING_USERS = 'user/loading';
 export const FETCH_USER_DETAIL = 'user-detail/fetch';
+
+export const DESTROY_PONDS = 'pond/destroy';
+export const DESTROY_USERS = 'user/destroy';

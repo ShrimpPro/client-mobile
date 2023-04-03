@@ -5,6 +5,7 @@ import { TextInput, HelperText, Button, Text } from "react-native-paper";
 import { useDispatch } from "react-redux";
 import { postLogin } from "../store/actions/actionUser";
 import { useTheme } from "@react-navigation/native";
+import { CommonActions } from "@react-navigation/native";
 
 export default function LoginScreen({ navigation }) {
   const dispatch = useDispatch();
@@ -33,6 +34,7 @@ export default function LoginScreen({ navigation }) {
     },
     row: {
       flexDirection: "row",
+      justifyContent: 'center'
     },
     register: {
       color: colors.primary,
@@ -51,7 +53,15 @@ export default function LoginScreen({ navigation }) {
   const loginHandler = (inputLogin) => {
     dispatch(postLogin(inputLogin))
       .then(() => {
-        navigation.navigate("Dashboard");
+        navigation.dispatch(
+          CommonActions.reset({
+              index: 1,
+              routes: [
+                  { name: "Landing Page" },
+                  { name: "Dashboard" }
+              ],
+          })
+        );
         console.log('Logged In');
       })
       .catch(err => {
@@ -69,7 +79,7 @@ export default function LoginScreen({ navigation }) {
           }}
         />
         <TextInput
-          label="email"
+          label="Email"
           value={inputLogin.email}
           mode="outlined"
           onChangeText={(value) => changeInput("email", value)}
@@ -93,7 +103,7 @@ export default function LoginScreen({ navigation }) {
         >
           Login
         </Button>
-        <View style={styles.row}>
+        <View style={[styles.row, { paddingTop: 10 }]}>
           <Text style={{ paddingRight: 5, fontFamily: "Poppins-Bold" }}>
             Dont have an account?
           </Text>
@@ -104,6 +114,19 @@ export default function LoginScreen({ navigation }) {
             }}
           >
             Register here
+          </Text>
+        </View>
+        <View style={[styles.row, { paddingTop: 10 }]}>
+          <Text style={{ paddingRight: 5, fontFamily: "Poppins-Bold" }}>
+            or check our Partners
+          </Text>
+          <Text
+            style={styles.register}
+            onPress={() => {
+              navigation.navigate("Landing Page");
+            }}
+          >
+            here
           </Text>
         </View>
       </View>

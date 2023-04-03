@@ -17,7 +17,10 @@ export default function SensorPhSuhu() {
   useEffect(() => {
     setLoading(true);
     dispatch(fetchPonds())
-      .then(ponds => dispatch(fetchPondDetail(ponds[0]?._id)))
+      .then(ponds => {
+        if (!ponds.length) setLoading(false);
+        else dispatch(fetchPondDetail(ponds[0]?._id))
+      })
       .then(() => {
         setLoading(false);
       })
@@ -28,10 +31,16 @@ export default function SensorPhSuhu() {
     <SafeAreaView style={styles.container}>
       {
         loading || pondLoading ? <LoadingSpinner /> : <>
-          <SelectPond />
-          <Graph histories={pond?.histories} />
-          <PH pH={pond?.pH} />
-          <Temperature temp={pond?.temp} />
+          {
+            pond && pond?.pH && pond?.temp ? <>
+              <SelectPond />
+              <Graph histories={pond?.histories} />
+              <PH pH={pond?.pH} />
+              <Temperature temp={pond?.temp} />
+            </> : <>
+              <Text>Buy device</Text>
+            </>
+          }
         </>
       }
     </SafeAreaView>

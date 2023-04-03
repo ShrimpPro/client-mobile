@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { baseUrl } from '../../config/connection';
-import { CHANGE_LOADING_PONDS, FETCH_HARVEST_DETAIL, FETCH_PONDS, FETCH_POND_DETAIL } from './actionType';
+import { CHANGE_LOADING_PONDS, DESTROY_PONDS, FETCH_HARVEST_DETAIL, FETCH_PONDS, FETCH_POND_DETAIL } from './actionType';
 import * as SecureStore from 'expo-secure-store';
 
 export const fetchPonds = () => {
@@ -23,6 +23,7 @@ export const fetchPonds = () => {
 export const fetchPondDetail = (id) => {
   return async (dispatch, getState) => {
     try {
+      if (!id) throw 'Data not found'
       dispatch({ type: CHANGE_LOADING_PONDS, payload: true });
       const access_token = await SecureStore.getItemAsync('access_token');
       const { data: pond } = await axios.get(baseUrl + 'partners/ponds/' + id, {
@@ -55,6 +56,7 @@ export const createHarvest = (inputHarvest, pondId) => {
 export const fetchHarvestDetail = (id) => {
   return async (dispatch, getState) => {
     try {
+      if (!id) throw 'Data not found'
       dispatch({ type: CHANGE_LOADING_PONDS, payload: true });
       const access_token = await SecureStore.getItemAsync('access_token');
       const { data: harvest } = await axios.get(baseUrl + 'partners/harvests/' + id, {
@@ -63,6 +65,16 @@ export const fetchHarvestDetail = (id) => {
       dispatch({ type: FETCH_HARVEST_DETAIL, payload: harvest });
       dispatch({ type: CHANGE_LOADING_PONDS, payload: false });
       return harvest;
+    } catch (error) {
+      throw error;
+    }
+  }
+}
+
+export const resetPonds = () => {
+  return async (dispatch, getState) => {
+    try {
+      dispatch({ type: DESTROY_PONDS });
     } catch (error) {
       throw error;
     }

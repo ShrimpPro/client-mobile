@@ -1,5 +1,6 @@
 import {
   CHANGE_LOADING_USERS,
+  DESTROY_USERS,
   FETCH_USERS,
   FETCH_USER_DETAIL,
 } from "../actions/actionType";
@@ -14,6 +15,8 @@ function userReducer(state = initialState, action) {
       return { ...state, loading: action.payload };
     case FETCH_USER_DETAIL:
       return { ...state, user: action.payload };
+    case DESTROY_USERS:
+      return { state: initialState };
     default:
       return state;
   }

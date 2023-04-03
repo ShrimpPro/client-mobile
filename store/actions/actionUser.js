@@ -5,6 +5,7 @@ import {
   CHANGE_LOADING_USERS,
   CHANGE_LOGIN_RESPONSE,
   CHANGE_REGISTER_RESPONSE,
+  DESTROY_USERS,
   FETCH_USERS,
   FETCH_USER_DETAIL,
 } from "./actionType";
@@ -37,12 +38,12 @@ export const setRegisterResponse = (payload) => {
 export function postRegister(inputRegister) {
   return async (dispatch, getState) => {
     try {
-      console.log("register api");
-      console.log(inputRegister);
+      const { data: user } = await axios.post(baseUrl + 'users/register', inputRegister);
+      return user;
     } catch (error) {
-      console.log(error);
+      throw error;
     }
-  };
+  }
 }
 
 export const fetchUsers = () => {
@@ -72,3 +73,13 @@ export const fetchUserDetail = (id) => {
     }
   };
 };
+
+export const resetUsers = () => {
+  return async (dispatch, getState) => {
+    try {
+      dispatch({ type: DESTROY_USERS });
+    } catch (error) {
+      throw error;
+    }
+  }
+}
