@@ -24,7 +24,7 @@ export default function Graph({ histories }) {
                 }}
                 width={350} // from react-native
                 height={220}
-                yAxisSuffix="C"
+                yAxisSuffix=" °C"
                 yAxisInterval={1}
                 chartConfig={{
                   backgroundColor: "#25aff3",
@@ -70,7 +70,7 @@ export default function Graph({ histories }) {
                 }}
                 width={350} // from react-native
                 height={220}
-                yAxisSuffix="C"
+                yAxisSuffix=" pH"
                 yAxisInterval={1}
                 chartConfig={{
                   backgroundColor: "#25aff3",

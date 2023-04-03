@@ -11,12 +11,6 @@ import LoadingSpinner from "../components/LoadingSpinner";
 
 export default function HarvestScreen({navigation}) {
   const { pond, loading } = useSelector((state) => state.ponds);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchPonds())
-      .catch((err) => console.log(err));
-  }, []);
 
   return (
     <SafeAreaView style={styles.container}>
