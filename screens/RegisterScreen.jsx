@@ -27,19 +27,6 @@ export default function RegisterScreen({navigation}) {
 
   return (
     <SafeAreaView style={styles.container}>
-      {/* <Image
-        style={styles.logo}
-        source={{
-          uri: "https://cdn.discordapp.com/attachments/1089065643346776075/1090570170487025754/20230329_163617_0000.png",
-        }}
-      /> */}
-      {/* <HelperText
-        style={{ marginBottom: 15, alignSelf: "center" }}
-        type="error"
-        visible={error}
-      >
-        Error on API response
-      </HelperText> */}
       <Text
         style={{
           fontFamily: Font["Poppins"],

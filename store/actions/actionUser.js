@@ -1,7 +1,12 @@
-import axios from 'axios';
-import * as SecureStore from 'expo-secure-store';
+import axios from "axios";
+import * as SecureStore from "expo-secure-store";
 import { baseUrl } from "../../config/connection";
-import { CHANGE_LOGIN_RESPONSE, CHANGE_REGISTER_RESPONSE } from "./actionType";
+import {
+  CHANGE_LOADING_USERS,
+  CHANGE_LOGIN_RESPONSE,
+  CHANGE_REGISTER_RESPONSE,
+  FETCH_USERS,
+} from "./actionType";
 
 export const setLoginResponse = (payload) => {
   return {
@@ -13,8 +18,8 @@ export const setLoginResponse = (payload) => {
 export function postLogin(inputLogin) {
   return async (dispatch, getState) => {
     try {
-      const { data } = await axios.post(baseUrl + 'users/login', inputLogin);
-      await SecureStore.setItemAsync('access_token', data.access_token);
+      const { data } = await axios.post(baseUrl + "users/login", inputLogin);
+      await SecureStore.setItemAsync("access_token", data.access_token);
     } catch (error) {
       throw error;
     }
@@ -38,3 +43,17 @@ export function postRegister(inputRegister) {
     }
   };
 }
+
+export const fetchUsers = () => {
+  return async (dispatch, getState) => {
+    try {
+      dispatch({ type: CHANGE_LOADING_USERS, payload: true });
+      const { data: users } = await axios.get(baseUrl + "users");
+      dispatch({ type: FETCH_USERS, payload: users });
+      dispatch({ type: CHANGE_LOADING_USERS, payload: false });
+      return users;
+    } catch (error) {
+      throw error;
+    }
+  };
+};
