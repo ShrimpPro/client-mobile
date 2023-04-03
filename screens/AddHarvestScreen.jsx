@@ -2,13 +2,17 @@ import { useState } from "react";
 import { View, StyleSheet } from "react-native";
 import { Button, Text, TextInput } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useDispatch, useSelector } from "react-redux";
+import { createHarvest } from "../store/actions/actionPond";
 
 export default function AddHarvestScreen({ navigation }) {
+  const { pond } = useSelector((state) => state.ponds);
+  const dispatch = useDispatch();
   const [inputAddHarvest, setInputAddHarvest] = useState({
-    modalAwal: "",
-    hasilPendapatan: "",
-    kualitasPanen: "",
-    deskripsi: "",
+    capital: "",
+    earning: "",
+    quality: "",
+    description: "",
   });
 
   const changeInput = (key, value) => {
@@ -16,47 +20,53 @@ export default function AddHarvestScreen({ navigation }) {
       ...inputAddHarvest,
     };
     newInput[key] = value;
-    setInputLogin(newInput);
+    setInputAddHarvest(newInput);
   };
+
+  const submitHarvest = () => {
+    dispatch(createHarvest(inputAddHarvest, pond._id))
+      .then(() => navigation.goBack())
+      .catch(err => console.log(err));
+  }
 
   return (
     <SafeAreaView style={styles.container}>
       <TextInput
         label="Modal Awal"
-        value={inputAddHarvest.modalAwal}
+        value={inputAddHarvest.capital}
         mode="outlined"
-        onChangeText={(value) => changeInput("modalAwal", value)}
-        style={{ marginBottom: 10 }}
-      />
-
-      <TextInput
-        label="Kualitas Panen"
-        value={inputAddHarvest.kualitasPanen}
-        mode="outlined"
-        onChangeText={(value) => changeInput("kualitasPanen", value)}
+        onChangeText={(value) => changeInput("capital", value)}
         style={{ marginBottom: 10 }}
       />
 
       <TextInput
         label="Hasil Pendapatan"
-        value={inputAddHarvest.hasilPendapatan}
+        value={inputAddHarvest.earning}
         mode="outlined"
-        onChangeText={(value) => changeInput("hasilPendapatan", value)}
+        onChangeText={(value) => changeInput("earning", value)}
+        style={{ marginBottom: 10 }}
+      />
+
+      <TextInput
+        label="Kualitas Panen"
+        value={inputAddHarvest.quality}
+        mode="outlined"
+        onChangeText={(value) => changeInput("quality", value)}
         style={{ marginBottom: 10 }}
       />
 
       <TextInput
         label="Deskripsi"
-        value={inputAddHarvest.deskripsi}
+        value={inputAddHarvest.description}
         mode="outlined"
-        onChangeText={(value) => changeInput("deskripsi", value)}
+        onChangeText={(value) => changeInput("description", value)}
         style={{ marginBottom: 10 }}
       />
 
       <Button
         mode="contained"
         uppercase={true}
-        onPress={() => navigation.goBack()}
+        onPress={() => submitHarvest()}
         style={styles.button}
       >
         Submit
