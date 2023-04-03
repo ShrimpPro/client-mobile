@@ -1,22 +1,23 @@
 import { StyleSheet, View } from "react-native";
 import React from "react";
 import { Button, Card, Text } from "react-native-paper";
+import { formatDate, tempCategory, tempColor } from "../helpers";
 
 export default function SuhuCard({ data }) {
   return (
     <View style={styles.container}>
-      <Card mode="elevated" style={styles.card}>
-        <Card.Content>
+      <Card mode="elevated">
+        <Card.Content style={styles.card}>
           <View style={styles.dateContainer}>
-            <Text variant="titleLarge">{data.date}</Text>
-          </View>
-          <View style={styles.footerContainer}>
-            <Text variant="titleMedium" style={{ color: "#fff" }}>
-              {data.kalimat}
-            </Text>
+            <Text variant="titleLarge">{formatDate(data.createdAt)}</Text>
           </View>
           <View style={styles.suhuContainer}>
-            <Text variant="titleMedium">{data.suhu}°C</Text>
+            <Text variant="titleMedium">{data.temp}°C</Text>
+          </View>
+          <View style={[styles.footerContainer, { backgroundColor: tempColor(data.temp) }]}>
+            <Text variant="titleMedium" style={{ color: 'white' }}>
+              {tempCategory(data.temp)}
+            </Text>
           </View>
         </Card.Content>
       </Card>
@@ -27,35 +28,27 @@ export default function SuhuCard({ data }) {
 const styles = StyleSheet.create({
   container: {
     marginBottom: 10,
+    width: 350
   },
   card: {
     backgroundColor: "white",
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center'
   },
   dateContainer: {
     flexDirection: "row",
-    alignItems: "center",
     paddingVertical: 10,
   },
   footerContainer: {
-    position: "absolute",
-    bottom: 290,
-    left: 270,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "flex-start",
-    paddingVertical: 4,
-    paddingHorizontal: 6,
-    backgroundColor: "#ff0303",
+    width: 100,
+    alignItems: 'center',
+    paddingVertical: 10,
+    paddingHorizontal: 15,
     borderRadius: 7,
   },
   suhuContainer: {
-    position: "absolute",
-    bottom: 290,
-    left: 200,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "flex-start",
     paddingVertical: 4,
-    paddingHorizontal: 6,
+    paddingHorizontal: 30,
   },
 });

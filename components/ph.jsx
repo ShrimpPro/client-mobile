@@ -1,22 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View } from "react-native";
+import { phColor } from "../helpers";
 
 export default function PH({ pH }) {
   const [circleColor, setCircleColor] = useState("#4e79a7");
 
   useEffect(() => {
-    let color;
-    if (pH >= 3 && pH <= 5) {
-      color = "#ffa500";
-    } else if (pH >= 0 && pH <= 2) {
-      color = "#ff0303";
-    } else if (pH >= 9 && pH <= 11) {
-      color = "#0255fa";
-    } else if (pH >= 12) {
-      color = "#482060";
-    } else {
-      color = "#008000";
-    }
+    const color = phColor(pH);
     setCircleColor(color);
   }, [pH]);
 
@@ -45,7 +35,7 @@ const styles = StyleSheet.create({
   circle: {
     alignItems: "center",
     justifyContent: "center",
-    width: 150,
+    width: 160,
     height: 150,
     borderRadius: 15,
     shadowColor: "#000",

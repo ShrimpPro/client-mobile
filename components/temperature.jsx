@@ -1,22 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View } from "react-native";
+import { tempColor } from "../helpers";
 
 export default function Temperature({ temp }) {
   const [circleColor, setCircleColor] = useState("#4e79a7");
 
   useEffect(() => {
-    let color;
-    if (temp >= 21 && temp <= 25) {
-      color = "#25aff3";
-    } else if (temp >= 0 && temp <= 20) {
-      color = "#0255fa";
-    } else if (temp >= 65 && temp <= 79) {
-      color = "#ffa500";
-    } else if (temp >= 80) {
-      color = "#ff0303";
-    } else {
-      color = "#00ff00";
-    }
+    const color = tempColor(temp);
     setCircleColor(color);
   }, [temp]);
 
@@ -45,7 +35,7 @@ const styles = StyleSheet.create({
   circle: {
     alignItems: "center",
     justifyContent: "center",
-    width: 150,
+    width: 160,
     height: 150,
     borderRadius: 15,
     shadowColor: "#000",
