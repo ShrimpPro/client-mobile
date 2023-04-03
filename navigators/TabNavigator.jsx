@@ -8,6 +8,8 @@ import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import SettingsScreen from "../screens/SettingsScreen";
 import DetailMitra from "../screens/DetailMitra";
 import PenadahPage from "../screens/pagepenadah";
+import ScreenHistoryPh from "../screens/screenhistoryPh";
+import HistoryScreen from "../screens/HistoryScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -60,10 +62,10 @@ export default function TabNavigator() {
       )}
     >
       <Tab.Screen
-        name="Sensor"
+        name="Home"
         component={SensorPhSuhu}
         options={{
-          tabBarLabel: "Sensor",
+          tabBarLabel: "Home",
           tabBarIcon: ({ color, size }) => {
             return <Icon name="home" size={size} color={color} />;
           },
@@ -76,6 +78,16 @@ export default function TabNavigator() {
           tabBarLabel: "Harvest",
           tabBarIcon: ({ color, size }) => {
             return <Icon name="chart-bar" size={size} color={color} />;
+          },
+        }}
+      />
+      <Tab.Screen
+        name="History"
+        component={HistoryScreen}
+        options={{
+          tabBarLabel: "History",
+          tabBarIcon: ({ color, size }) => {
+            return <Icon name="history" size={size} color={color} />;
           },
         }}
       />
