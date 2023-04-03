@@ -8,44 +8,47 @@ import { fetchPonds } from "../store/actions/actionPond";
 import GraphPanen from "../components/GraphListPanen";
 import SelectPond from "../components/SelectPond";
 import LoadingSpinner from "../components/LoadingSpinner";
+import NoDevice from "../components/NoDevice";
 
 export default function HarvestScreen({ navigation }) {
   const { pond, loading } = useSelector((state) => state.ponds);
 
   return (
     <SafeAreaView style={styles.container}>
-      {loading ? (
-        <LoadingSpinner />
-      ) : (
-        <>
-          <SelectPond />
-          <View style={styles.headerContainer}>
-            <Text variant="headlineMedium" style={styles.textHeader}>
-              List Panen
-            </Text>
-          </View>
-          <Button
-            icon="check"
-            mode="contained"
-            onPress={() => navigation.navigate("Tambah Panen")}
-          >
-            Tambah Panen
-          </Button>
-          <View style={styles.graphContainer}>
-            <GraphPanen harvests={pond?.harvests}/>
-          </View>
-          <View style={styles.contentContainer}>
-            <FlatList
-              showsVerticalScrollIndicator={false}
-              data={pond?.harvests}
-              keyExtractor={(data) => data._id}
-              renderItem={({ item }) => {
-                return <HarvestCard data={item} />;
-              }}
-            />
-          </View>
+      {
+        loading ? <LoadingSpinner /> : <>
+          {
+            pond && pond?.pH && pond?.temp ? <>
+              <SelectPond />
+              <View style={styles.headerContainer}>
+                <Text variant="headlineMedium" style={styles.textHeader}>
+                  List Panen
+                </Text>
+              </View>
+              <Button
+                icon="check"
+                mode="contained"
+                onPress={() => navigation.navigate("Tambah Panen")}
+              >
+                Tambah Panen
+              </Button>
+              <View style={styles.graphContainer}>
+                <GraphPanen harvests={pond?.harvests}/>
+              </View>
+              <View style={styles.contentContainer}>
+                <FlatList
+                  showsVerticalScrollIndicator={false}
+                  data={pond?.harvests}
+                  keyExtractor={(data) => data._id}
+                  renderItem={({ item }) => {
+                    return <HarvestCard data={item} />;
+                  }}
+                />
+              </View>
+            </> : <NoDevice />
+          }
         </>
-      )}
+      }
     </SafeAreaView>
   );
 }

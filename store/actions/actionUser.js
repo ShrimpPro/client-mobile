@@ -83,3 +83,17 @@ export const resetUsers = () => {
     }
   }
 }
+
+export const createInvoice = (category) => {
+  return async (dispatch, getState) => {
+    try {
+      const access_token = await SecureStore.getItemAsync('access_token');
+      const { data: order } = await axios.post(baseUrl + 'payments/invoice', { isPond: category }, {
+        headers: { access_token }
+      })
+      return order;
+    } catch (error) {
+      throw error;
+    }
+  }
+}
