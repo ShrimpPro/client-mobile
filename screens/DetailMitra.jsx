@@ -62,7 +62,7 @@ export default function DetailMitra() {
               </ScrollView>
             </View>
             <View style={styles.wrapdot}>
-              {user?.images.map((e, index) => (
+              {user?.images?.map((e, index) => (
                 <Text key={e} style={img == index ? styles.dotActive : styles.dot}>
                   ●
                 </Text>
@@ -85,11 +85,11 @@ export default function DetailMitra() {
                   </View>
                   <View style={styles.dataContainer}>
                     <Text style={styles.title}>Jenis Tambak:</Text>
-                    <Text style={styles.content}>{pondCategory(user.ponds)}</Text>
+                    <Text style={styles.content}>{user.ponds ? pondCategory(user.ponds) : ''}</Text>
                   </View>
                   <View style={styles.dataContainer}>
                     <Text style={styles.title}>Membership:</Text>
-                    <Text style={styles.content}>{capitalizeFirstLetter(user.membership)}</Text>
+                    <Text style={styles.content}>{user.membership ? capitalizeFirstLetter(user.membership) : ''}</Text>
                   </View>
                 </Card.Content>
               </Card>

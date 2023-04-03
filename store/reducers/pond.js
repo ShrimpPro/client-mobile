@@ -1,6 +1,6 @@
-import { CHANGE_LOADING_PONDS, FETCH_PONDS, FETCH_POND_DETAIL } from "../actions/actionType";
+import { CHANGE_LOADING_PONDS, FETCH_HARVEST_DETAIL, FETCH_PONDS, FETCH_POND_DETAIL } from "../actions/actionType";
 
-const initialState = { ponds: [], pond: {}, loading: false }
+const initialState = { ponds: [], pond: {}, harvest: {}, loading: false }
 
 function pondReducer(state = initialState, action) {
   switch (action.type) {
@@ -10,6 +10,8 @@ function pondReducer(state = initialState, action) {
       return { ...state, loading: action.payload }
     case FETCH_POND_DETAIL:
       return { ...state, pond: action.payload }
+    case FETCH_HARVEST_DETAIL:
+      return { ...state, harvest: action.payload }
     default:
       return state
   }

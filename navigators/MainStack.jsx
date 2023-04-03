@@ -7,6 +7,7 @@ import WelcomeScreen from "../screens/WelcomeScreen";
 import DetailMitra from "../screens/DetailMitra";
 import MitraListScreen from "../screens/MitraListScreen";
 import AddHarvestScreen from "../screens/AddHarvestScreen";
+import HarvestDetailScreen from "../screens/HarvestDetailScreen";
 
 export default function MainStack() {
   return (
@@ -22,6 +23,7 @@ export default function MainStack() {
       <Stack.Screen name="Detail Mitra" component={DetailMitra} />
       <Stack.Screen name="List Mitra" component={MitraListScreen} />
       <Stack.Screen name="Tambah Panen" component={AddHarvestScreen} />
+      <Stack.Screen name="Detail Harvest" component={HarvestDetailScreen} />
     </Stack.Navigator>
   );
 }
