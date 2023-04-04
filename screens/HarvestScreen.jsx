@@ -15,37 +15,39 @@ export default function HarvestScreen({ navigation }) {
   const { pond, loading } = useSelector((state) => state.ponds);
   return (
     <>
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
         {loading ? (
           <LoadingSpinner />
         ) : (
           <>
             {pond && pond?.pH && pond?.temp ? (
               <>
-                <ScrollView>
+                <ScrollView showsVerticalScrollIndicator={false}>
                   <SelectPond />
-                  <Button
-                    icon="text-box-plus"
-                    mode="contained"
-                    style={styles.button}
-                    uppercase={true}
-                    onPress={() => navigation.navigate("Tambah Panen")}
-                  >
-                    Tambah Panen
-                  </Button>
-                  <View style={styles.graphContainer}>
-                    <GraphPanen harvests={pond?.harvests} />
-                  </View>
                   <View style={styles.contentContainer}>
-                    <FlatList
-                      showsVerticalScrollIndicator={false}
-                      scrollEnabled={false}
-                      data={pond?.harvests}
-                      keyExtractor={(data) => data._id}
-                      renderItem={({ item }) => {
-                        return <HarvestCard data={item} />;
-                      }}
-                    />
+                    <Button
+                      icon="text-box-plus"
+                      mode="contained"
+                      style={styles.button}
+                      uppercase={true}
+                      onPress={() => navigation.navigate("Tambah Panen")}
+                    >
+                      Tambah Panen
+                    </Button>
+                    <View style={styles.graphContainer}>
+                      <GraphPanen harvests={pond?.harvests} />
+                    </View>
+                    <View style={styles.listContainer}>
+                      <FlatList
+                        showsVerticalScrollIndicator={false}
+                        scrollEnabled={false}
+                        data={pond?.harvests}
+                        keyExtractor={(data) => data._id}
+                        renderItem={({ item }) => {
+                          return <HarvestCard data={item} />;
+                        }}
+                      />
+                    </View>
                   </View>
                 </ScrollView>
               </>
@@ -54,7 +56,7 @@ export default function HarvestScreen({ navigation }) {
             )}
           </>
         )}
-      </View>
+      </SafeAreaView>
     </>
   );
 }
@@ -62,20 +64,20 @@ export default function HarvestScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    marginTop: 40
   },
-  headerContainer: {
-    marginVertical: 6,
+  contentContainer: {
+    paddingHorizontal: 20,
   },
   textHeader: {
     textAlign: "center",
   },
   graphContainer: {
-    marginTop: 10,
+    marginVertical: 10
   },
   button: {
     borderRadius: 5,
     fontWeight: "bold",
+    paddingVertical: 5
   },
 });

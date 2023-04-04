@@ -8,7 +8,7 @@ export const formatMoney = (money) => new Intl.NumberFormat('id-ID', {
 export const phColor = (pH) => {
   let color;
   if (pH >= 7 && pH <= 8.5) {
-    color = "#008000";
+    color = "#08b608";
   } else if (pH >= 6 && pH < 7) {
     color = "#ffa500";
   } else if (pH >= 8.5 && pH <= 9.5) {
@@ -55,6 +55,18 @@ export const tempCategory = (temp) => {
     category = "Bahaya";
   }
   return category;
+}
+
+export const categoryColor = (category) => {
+  let color;
+  if (category === 'Baik') {
+    color = "#08b608";
+  } else if (category === 'Cukup') {
+    color = "#ffa500";
+  } else {
+    color = "#ff0303";
+  }
+  return color;
 }
 
 export const pondCategory = (ponds) => {
