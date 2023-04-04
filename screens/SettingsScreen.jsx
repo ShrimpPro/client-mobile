@@ -24,9 +24,25 @@ export default function SettingsScreen({ navigation }) {
     );
   };
 
+  const handlerProfile = async () => {
+    navigation.navigate("Profile");
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.container}>
+        <TouchableOpacity onPress={handlerProfile}>
+          <Card
+            mode="elevated"
+            style={{ backgroundColor: "white", marginBottom: 10 }}
+          >
+            <Card.Content>
+              <Chip icon={"account-circle"} style={{ backgroundColor: "white" }}>
+                Profile
+              </Chip>
+            </Card.Content>
+          </Card>
+        </TouchableOpacity>
         <TouchableOpacity onPress={handlerLogout}>
           <Card mode="elevated" style={{ backgroundColor: "white" }}>
             <Card.Content>

@@ -18,9 +18,9 @@ export default function MitraCard({ data, navigation }) {
             >
               <View>
                 {data.membership === "premium" ? (
-                  <Chip icon="check-decagram" style={{ backgroundColor: "white" }}>{data.email}</Chip>
+                  <Chip icon="check-decagram" style={{ backgroundColor: "white" }}>{data.name}</Chip>
                 ) : (
-                  <Chip style={{ backgroundColor: "white" }}>{data.email}</Chip>
+                  <Chip style={{ backgroundColor: "white" }}>{data.name}</Chip>
                 )}
               </View>
               <View>

@@ -38,12 +38,15 @@ export const setRegisterResponse = (payload) => {
 export function postRegister(inputRegister) {
   return async (dispatch, getState) => {
     try {
-      const { data: user } = await axios.post(baseUrl + 'users/register', inputRegister);
+      const { data: user } = await axios.post(
+        baseUrl + "users/register",
+        inputRegister
+      );
       return user;
     } catch (error) {
       throw error;
     }
-  }
+  };
 }
 
 export const fetchUsers = () => {
@@ -81,19 +84,41 @@ export const resetUsers = () => {
     } catch (error) {
       throw error;
     }
-  }
-}
+  };
+};
 
 export const createInvoice = (category) => {
   return async (dispatch, getState) => {
     try {
-      const access_token = await SecureStore.getItemAsync('access_token');
-      const { data: order } = await axios.post(baseUrl + 'payments/invoice', { isPond: category }, {
-        headers: { access_token }
-      })
+      const access_token = await SecureStore.getItemAsync("access_token");
+      const { data: order } = await axios.post(
+        baseUrl + "payments/invoice",
+        { isPond: category },
+        {
+          headers: { access_token },
+        }
+      );
       return order;
     } catch (error) {
       throw error;
     }
-  }
-}
+  };
+};
+
+export const fetchCurrentUser = () => {
+  return async (dispatch, getState) => {
+    try {
+      dispatch({ type: CHANGE_LOADING_USERS, payload: true });
+      const access_token = await SecureStore.getItemAsync("access_token");
+      const { data: user } = await axios.get(baseUrl + "users/current", {
+        headers: { access_token },
+      });
+      dispatch({ type: FETCH_USER_DETAIL, payload: user });
+      dispatch({ type: CHANGE_LOADING_USERS, payload: false });
+      console.log(user);
+      return user;
+    } catch (error) {
+      throw error;
+    }
+  };
+};

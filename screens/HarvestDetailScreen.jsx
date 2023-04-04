@@ -12,7 +12,6 @@ export default function HarvestDetailScreen({ navigation }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // navigation.setOptions({ title: data?.movieDetail.title });
     dispatch(fetchHarvestDetail(id)).catch((err) => console.log(err));
   }, []);
 
@@ -28,19 +27,19 @@ export default function HarvestDetailScreen({ navigation }) {
             <Card.Content>
               <View style={styles.dataContainer}>
                 <Text style={styles.title}>Modal Awal:</Text>
-                <Text style={styles.content}>{harvest.capital}</Text>
+                <Text style={styles.content}>{harvest?.capital}</Text>
               </View>
               <View style={styles.dataContainer}>
                 <Text style={styles.title}>Pendapatan:</Text>
-                <Text style={styles.content}>{harvest.earning}</Text>
+                <Text style={styles.content}>{harvest?.earning}</Text>
               </View>
               <View style={styles.dataContainer}>
                 <Text style={styles.title}>Kualitas:</Text>
-                <Text style={styles.content}>{harvest.quality}</Text>
+                <Text style={styles.content}>{harvest?.quality}</Text>
               </View>
               <View style={styles.dataContainer}>
                 <Text style={styles.title}>Deskripsi:</Text>
-                <Text style={styles.content}>{harvest.description}</Text>
+                <Text style={styles.content}>{harvest?.description}</Text>
               </View>
             </Card.Content>
           </Card>

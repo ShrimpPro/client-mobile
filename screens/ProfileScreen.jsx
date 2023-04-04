@@ -9,23 +9,22 @@ import {
   StatusBar,
   Image,
 } from "react-native";
-import { Card, Chip, Button } from "react-native-paper";
+import { Button, Card, Chip } from "react-native-paper";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchUserDetail } from "../store/actions/actionUser";
+import { fetchCurrentUser, fetchUserDetail } from "../store/actions/actionUser";
 import { useRoute } from "@react-navigation/native";
 import LoadingSpinner from "../components/LoadingSpinner";
 import { capitalizeFirstLetter, pondCategory } from "../helpers";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 
-export default function DetailMitra() {
+export default function ProfileScreen() {
   const [img, setImg] = useState(0);
   const { user, loading } = useSelector((state) => state.users);
   const dispatch = useDispatch();
-  const { id } = useRoute().params;
 
   useEffect(() => {
-    dispatch(fetchUserDetail(id)).catch((err) => console.log(err));
+    dispatch(fetchCurrentUser()).catch((err) => console.log(err));
   }, []);
 
   onchange = (nativeEvent) => {
@@ -77,6 +76,7 @@ export default function DetailMitra() {
               <Card style={{ backgroundColor: "white", fontWeight: "bold" }}>
                 <Card.Content>
                   <View style={styles.dataContainerRow}>
+                    {/* <Text style={styles.title}>{user?.name}</Text> */}
                     <Chip mode="outlined">{user?.name}</Chip>
                     <Chip>{user?.ponds ? pondCategory(user?.ponds) : ""}</Chip>
                   </View>
@@ -104,11 +104,28 @@ export default function DetailMitra() {
                   </View>
                   <View style={styles.dataContainer}>
                     <Text style={styles.title}>Membership:</Text>
-                    <Text style={styles.content}>
-                      {user?.membership
-                        ? capitalizeFirstLetter(user?.membership)
-                        : ""}
-                    </Text>
+                    {user?.membership ? (
+                      capitalizeFirstLetter(user?.membership)
+                    ) : (
+                      <Button
+                        mode="contained"
+                        uppercase={true}
+                        style={{ borderRadius: 5 }}
+                        onPress={() => {}}
+                      >
+                        Buy Membership
+                      </Button>
+                    )}
+                  </View>
+                  <View>
+                    <Button
+                      mode="contained"
+                      uppercase={true}
+                      style={{ borderRadius: 5 }}
+                      onPress={() => {}}
+                    >
+                      Edit Profile
+                    </Button>
                   </View>
                 </Card.Content>
               </Card>
