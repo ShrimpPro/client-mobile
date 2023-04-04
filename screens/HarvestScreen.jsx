@@ -15,7 +15,7 @@ export default function HarvestScreen({ navigation }) {
   const { pond, loading } = useSelector((state) => state.ponds);
   return (
     <>
-      <SafeAreaView style={styles.container}>
+      <View style={styles.container}>
         {loading ? (
           <LoadingSpinner />
         ) : (
@@ -54,7 +54,7 @@ export default function HarvestScreen({ navigation }) {
             )}
           </>
         )}
-      </SafeAreaView>
+      </View>
     </>
   );
 }

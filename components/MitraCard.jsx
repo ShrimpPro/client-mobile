@@ -4,6 +4,7 @@ import { Button, Card, Chip, Text } from "react-native-paper";
 import { pondCategory } from "../helpers";
 
 export default function MitraCard({ data, navigation }) {
+  console.log(data);
   return (
     <View style={styles.container}>
       <TouchableOpacity
@@ -12,9 +13,15 @@ export default function MitraCard({ data, navigation }) {
       >
         <Card mode="elevated" style={styles.card}>
           <Card.Content>
-            <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+            <View
+              style={{ flexDirection: "row", justifyContent: "space-between" }}
+            >
               <View>
-                <Chip>{data.email}</Chip>
+                {data.membership === "premium" ? (
+                  <Chip icon="check-decagram" style={{ backgroundColor: "white" }}>{data.email}</Chip>
+                ) : (
+                  <Chip style={{ backgroundColor: "white" }}>{data.email}</Chip>
+                )}
               </View>
               <View>
                 <Chip>{pondCategory(data.ponds)}</Chip>
@@ -28,10 +35,10 @@ export default function MitraCard({ data, navigation }) {
 }
 
 const styles = StyleSheet.create({
-  container: {
-  },
+  container: {},
   card: {
     marginHorizontal: 15,
-    marginVertical: 10
-  }
+    marginVertical: 10,
+    backgroundColor: "white"
+  },
 });

@@ -15,6 +15,8 @@ import { fetchUserDetail } from "../store/actions/actionUser";
 import { useRoute } from "@react-navigation/native";
 import LoadingSpinner from "../components/LoadingSpinner";
 import { capitalizeFirstLetter, pondCategory } from "../helpers";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { MaterialIcons } from "@expo/vector-icons";
 
 export default function DetailMitra() {
   const [img, setImg] = useState(0);
@@ -23,8 +25,7 @@ export default function DetailMitra() {
   const { id } = useRoute().params;
 
   useEffect(() => {
-    dispatch(fetchUserDetail(id))
-      .catch((err) => console.log(err));
+    dispatch(fetchUserDetail(id)).catch((err) => console.log(err));
   }, []);
 
   onchange = (nativeEvent) => {
@@ -40,8 +41,9 @@ export default function DetailMitra() {
 
   return (
     <>
-      {
-        loading ? <LoadingSpinner /> :
+      {loading ? (
+        <LoadingSpinner />
+      ) : (
         <>
           <SafeAreaView style={styles.container}>
             <View style={{ marginTop: 20 }}>
@@ -63,7 +65,10 @@ export default function DetailMitra() {
             </View>
             <View style={styles.wrapdot}>
               {user?.images?.map((e, index) => (
-                <Text key={e} style={img == index ? styles.dotActive : styles.dot}>
+                <Text
+                  key={e}
+                  style={img == index ? styles.dotActive : styles.dot}
+                >
                   ●
                 </Text>
               ))}
@@ -73,30 +78,46 @@ export default function DetailMitra() {
                 <Card.Content>
                   <View style={styles.dataContainer}>
                     <Text style={styles.title}>Nama:</Text>
-                    <Text style={styles.content}>{user.name}</Text>
+                    <Text style={styles.content}>{user?.name}</Text>
                   </View>
                   <View style={styles.dataContainer}>
-                    <Text style={styles.title}>Phone Number:</Text>
-                    <Text style={styles.content}>{user.phoneNumber}</Text>
+                    <MaterialCommunityIcons
+                      name="phone"
+                      size={24}
+                      color="black"
+                      style={{ marginBottom: 5 }}
+                    />
+                    <Text style={styles.content}>{user?.phoneNumber}</Text>
                   </View>
                   <View style={styles.dataContainer}>
-                    <Text style={styles.title}>Address:</Text>
-                    <Text style={styles.content}>{user.address}</Text>
+                    <MaterialIcons
+                      name="location-pin"
+                      size={24}
+                      color="black"
+                      style={{ marginBottom: 5 }}
+                    />
+                    <Text style={styles.content}>{user?.address}</Text>
                   </View>
                   <View style={styles.dataContainer}>
                     <Text style={styles.title}>Jenis Tambak:</Text>
-                    <Text style={styles.content}>{user.ponds ? pondCategory(user.ponds) : ''}</Text>
+                    <Text style={styles.content}>
+                      {user?.ponds ? pondCategory(user?.ponds) : ""}
+                    </Text>
                   </View>
                   <View style={styles.dataContainer}>
                     <Text style={styles.title}>Membership:</Text>
-                    <Text style={styles.content}>{user.membership ? capitalizeFirstLetter(user.membership) : ''}</Text>
+                    <Text style={styles.content}>
+                      {user?.membership
+                        ? capitalizeFirstLetter(user?.membership)
+                        : ""}
+                    </Text>
                   </View>
                 </Card.Content>
               </Card>
             </View>
           </SafeAreaView>
         </>
-      }
+      )}
     </>
   );
 }

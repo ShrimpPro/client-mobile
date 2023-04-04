@@ -4,8 +4,9 @@ import { useRoute } from "@react-navigation/native";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchHarvestDetail } from "../store/actions/actionPond";
 import { Card } from "react-native-paper";
+import LoadingSpinner from "../components/LoadingSpinner";
 
-export default function HarvestDetailScreen({navigation}) {
+export default function HarvestDetailScreen({ navigation }) {
   const { id } = useRoute().params;
   const { harvest, loading } = useSelector((state) => state.ponds);
   const dispatch = useDispatch();
@@ -15,36 +16,36 @@ export default function HarvestDetailScreen({navigation}) {
     dispatch(fetchHarvestDetail(id)).catch((err) => console.log(err));
   }, []);
 
+  if (loading) return <LoadingSpinner />;
+
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.contentContainer}>
-        <Card>
-          <Card.Content>
-            <View style={styles.dataContainer}>
-              <Text style={styles.title}>Modal Awal:</Text>
-              <Text style={styles.content}>{harvest.capital}</Text>
-            </View>
-            <View style={styles.dataContainer}>
-              <Text style={styles.title}>Pendapatan:</Text>
-              <Text style={styles.content}>{harvest.earning}</Text>
-            </View>
-            <View style={styles.dataContainer}>
-              <Text style={styles.title}>Kualitas:</Text>
-              <Text style={styles.content}>{harvest.quality}</Text>
-            </View>
-            <View style={styles.dataContainer}>
-              <Text style={styles.title}>Deskripsi:</Text>
-              <Text style={styles.content}>{harvest.description}</Text>
-            </View>
-          </Card.Content>
-        </Card>
-      </View>
-      {/* <Card>
-        <Text>{harvest.capital}</Text>
-        <Text>{harvest.earning}</Text>
-        <Text>{harvest.quality}</Text>
-        <Text>{harvest.description}</Text>
-      </Card> */}
+      {loading ? (
+        <LoadingSpinner />
+      ) : (
+        <View style={styles.contentContainer}>
+          <Card>
+            <Card.Content>
+              <View style={styles.dataContainer}>
+                <Text style={styles.title}>Modal Awal:</Text>
+                <Text style={styles.content}>{harvest.capital}</Text>
+              </View>
+              <View style={styles.dataContainer}>
+                <Text style={styles.title}>Pendapatan:</Text>
+                <Text style={styles.content}>{harvest.earning}</Text>
+              </View>
+              <View style={styles.dataContainer}>
+                <Text style={styles.title}>Kualitas:</Text>
+                <Text style={styles.content}>{harvest.quality}</Text>
+              </View>
+              <View style={styles.dataContainer}>
+                <Text style={styles.title}>Deskripsi:</Text>
+                <Text style={styles.content}>{harvest.description}</Text>
+              </View>
+            </Card.Content>
+          </Card>
+        </View>
+      )}
     </SafeAreaView>
   );
 }
