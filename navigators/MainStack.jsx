@@ -10,6 +10,9 @@ import AddHarvestScreen from "../screens/AddHarvestScreen";
 import HarvestDetailScreen from "../screens/HarvestDetailScreen";
 import PaymentScreen from "../screens/PaymentScreen";
 import ProfileScreen from "../screens/ProfileScreen";
+import OrderScreen from "../screens/OrderScreen";
+import EditProfileScreen from "../screens/EditProfileScreen";
+import CategoryScreen from "../components/CategoryScreen";
 
 export default function MainStack() {
   return (
@@ -33,6 +36,9 @@ export default function MainStack() {
       <Stack.Screen name="Detail Harvest" component={HarvestDetailScreen} />
       <Stack.Screen name="Payment" component={PaymentScreen} />
       <Stack.Screen name="Profile" component={ProfileScreen} />
+      <Stack.Screen name="Order" component={OrderScreen} />
+      <Stack.Screen name="Edit Profile" component={EditProfileScreen} />
+      <Stack.Screen name="Category" component={CategoryScreen} />
     </Stack.Navigator>
   );
 }

@@ -28,15 +28,15 @@ export default function HarvestDetailScreen({ navigation }) {
             <Card.Content>
               <View style={styles.dataContainer}>
                 <Text style={styles.title}>Modal Awal:</Text>
-                <Text style={styles.content}>{harvest.capital ? formatMoney(harvest.capital) : ''}</Text>
+                <Text style={styles.content}>{harvest?.capital ? formatMoney(harvest.capital) : ''}</Text>
               </View>
               <View style={styles.dataContainer}>
                 <Text style={styles.title}>Pendapatan:</Text>
-                <Text style={styles.content}>{harvest.earning ? formatMoney(harvest.earning) : ''}</Text>
+                <Text style={styles.content}>{harvest?.earning ? formatMoney(harvest.earning) : ''}</Text>
               </View>
               <View style={styles.dataContainer}>
                 <Text style={styles.title}>Laba Bersih:</Text>
-                <Text style={styles.content}>{harvest.capital && harvest.earning ? formatMoney(netProfit(harvest.capital, harvest.earning)): ''}</Text>
+                <Text style={styles.content}>{harvest?.capital && harvest?.earning ? formatMoney(netProfit(harvest.capital, harvest.earning)): ''}</Text>
               </View>
               <View style={styles.dataContainer}>
                 <Text style={styles.title}>Kualitas:</Text>
