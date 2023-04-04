@@ -3,39 +3,55 @@ import { StyleSheet, View } from "react-native";
 import { Text, useTheme } from "react-native-paper";
 import { useDispatch } from "react-redux";
 import { createInvoice } from "../store/actions/actionUser";
+import { useState } from "react";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 export default function CategoryScreen() {
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const { colors } = useTheme();
+
   const basicHandler = () => {
+    setLoading(true);
     dispatch(createInvoice("BASIC"))
-      .then((order) => navigation.navigate("Payment", { order }))
+      .then((order) => {
+        setLoading(false);
+        navigation.navigate("Payment", { order })
+      })
       .catch((err) => console.log(err));
   };
 
   const premiumHandler = () => {
+    setLoading(true);
     dispatch(createInvoice("PREMIUM"))
-      .then((order) => navigation.navigate("Payment", { order }))
+      .then((order) => {
+        setLoading(false);
+        navigation.navigate("Payment", { order })
+      })
       .catch((err) => console.log(err));
   };
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Select Category</Text>
-      <View style={styles.category}>
-        <Text
-          style={[styles.text, { color: colors.primary }]}
-          onPress={() => basicHandler()}
-        >
-          Basic
-        </Text>
-        <Text
-          style={[styles.text, { color: colors.primary }]}
-          onPress={() => premiumHandler()}
-        >
-          Premium
-        </Text>
-      </View>
+      {
+        loading ? <LoadingSpinner /> : <>
+          <Text style={styles.title}>Select Category</Text>
+          <View style={styles.category}>
+            <Text
+              style={[styles.text, { color: colors.primary }]}
+              onPress={() => basicHandler()}
+            >
+              Basic
+            </Text>
+            <Text
+              style={[styles.text, { color: colors.primary }]}
+              onPress={() => premiumHandler()}
+            >
+              Premium
+            </Text>
+          </View>
+        </>
+      }
     </View>
   );
 }

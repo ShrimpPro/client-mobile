@@ -6,6 +6,7 @@ import HomeScreen from "../screens/HomeScreen";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import SettingsScreen from "../screens/SettingsScreen";
 import HistoryScreen from "../screens/HistoryScreen";
+import ProfileScreen from "../screens/ProfileScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -86,12 +87,12 @@ export default function TabNavigator() {
         }}
       />
       <Tab.Screen
-        name="Settings"
-        component={SettingsScreen}
+        name="Profile"
+        component={ProfileScreen}
         options={{
-          tabBarLabel: "Settings",
+          tabBarLabel: "Profile",
           tabBarIcon: ({ color, size }) => {
-            return <Icon name="cog" size={size} color={color} />;
+            return <Icon name="account" size={size} color={color} />;
           },
         }}
       />
