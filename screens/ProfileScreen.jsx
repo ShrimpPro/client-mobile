@@ -63,7 +63,9 @@ export default function ProfileScreen({ navigation }) {
   return (
     <>
       {loading ? (
-        <LoadingSpinner />
+        <View style={{ flex: 1, justifyContent: 'center' }}>
+          <LoadingSpinner />
+        </View>
       ) : (
         <>
           <SafeAreaView style={styles.container}>
