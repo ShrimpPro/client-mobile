@@ -15,7 +15,7 @@ import { fetchCurrentUser, fetchUserDetail, resetUsers } from "../store/actions/
 import * as SecureStore from "expo-secure-store";
 import { CommonActions } from "@react-navigation/native";
 import LoadingSpinner from "../components/LoadingSpinner";
-import { capitalizeFirstLetter, pondCategory } from "../helpers";
+import { capitalizeFirstLetterAndLowerTheRest, pondCategory } from "../helpers";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { resetPonds } from "../store/actions/actionPond";
@@ -134,7 +134,7 @@ export default function ProfileScreen({ navigation }) {
                     {user?.membership ? (
                       <View style={{ flexDirection: 'row' }}>
                         <Text style={[styles.title, { marginRight: 7 }]}>Membership:</Text>
-                        <Text style={styles.title}>{capitalizeFirstLetter(user?.membership)}</Text>
+                        <Text style={styles.title}>{capitalizeFirstLetterAndLowerTheRest(user?.membership)}</Text>
                       </View>
                     ) : (
                       <>

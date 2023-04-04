@@ -78,6 +78,9 @@ export const pondCategory = (ponds) => {
 export const capitalizeFirstLetter = (word) =>
   word[0].toUpperCase() + word.slice(1);
 
+export const capitalizeFirstLetterAndLowerTheRest = (word) =>
+  word[0].toUpperCase() + word.slice(1).toLowerCase();
+
 export const dateToHours = (date) =>
   date.split("T")[1].split(".")[0].slice(0, -3);
 export const dateToMonth = (date) => {
