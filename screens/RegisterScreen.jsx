@@ -101,7 +101,7 @@ export default function RegisterScreen({ navigation }) {
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 15,
+    paddingHorizontal: 25,
     flex: 1,
     justifyContent: "center",
   },

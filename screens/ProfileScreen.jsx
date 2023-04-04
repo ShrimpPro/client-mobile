@@ -11,12 +11,14 @@ import {
 } from "react-native";
 import { Button, Card, Chip } from "react-native-paper";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchCurrentUser, fetchUserDetail } from "../store/actions/actionUser";
-import { useRoute } from "@react-navigation/native";
+import { fetchCurrentUser, fetchUserDetail, resetUsers } from "../store/actions/actionUser";
+import * as SecureStore from "expo-secure-store";
+import { CommonActions } from "@react-navigation/native";
 import LoadingSpinner from "../components/LoadingSpinner";
 import { capitalizeFirstLetter, pondCategory } from "../helpers";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
+import { resetPonds } from "../store/actions/actionPond";
 
 export default function ProfileScreen({ navigation }) {
   const [img, setImg] = useState(0);
@@ -44,6 +46,18 @@ export default function ProfileScreen({ navigation }) {
 
   const handleEditProfile = () => {
     navigation.navigate("Edit Profile", { id: user._id });
+  };
+
+  const handlerLogout = async () => {
+    await SecureStore.deleteItemAsync("access_token");
+    dispatch(resetPonds());
+    dispatch(resetUsers());
+    navigation.dispatch(
+      CommonActions.reset({
+        index: 0,
+        routes: [{ name: "Login" }],
+      })
+    );
   };
 
   return (
@@ -88,10 +102,8 @@ export default function ProfileScreen({ navigation }) {
                     <Chip mode="outlined">
                       <Text>{user?.name}</Text>
                     </Chip>
-                    <Chip>
-                      <Text>
-                        {user?.ponds ? pondCategory(user?.ponds) : ""}
-                      </Text>
+                    <Chip icon={"logout"} mode="outlined" onPress={handlerLogout}>
+                      Logout
                     </Chip>
                   </View>
                   <View style={styles.dataContainer}>
@@ -117,21 +129,25 @@ export default function ProfileScreen({ navigation }) {
                     </View>
                   </View>
                   <View style={styles.dataContainer}>
-                    <Text style={styles.title}>Membership:</Text>
                     {user?.membership ? (
-                      <Text>{capitalizeFirstLetter(user?.membership)}</Text>
+                      <View style={{ flexDirection: 'row' }}>
+                        <Text style={[styles.title, { marginRight: 7 }]}>Membership:</Text>
+                        <Text style={styles.title}>{capitalizeFirstLetter(user?.membership)}</Text>
+                      </View>
                     ) : (
-                      <Button
-                        mode="contained"
-                        uppercase={true}
-                        style={{ borderRadius: 5 }}
-                        onPress={handleBuyMembership}
-                      >
-                        Buy Membership
-                      </Button>
+                      <>
+                        <Button
+                          mode="contained"
+                          uppercase={true}
+                          style={{ borderRadius: 5 }}
+                          onPress={handleBuyMembership}
+                        >
+                          Buy Membership
+                        </Button>
+                      </>
                     )}
                   </View>
-                  <View>
+                  <View style={styles.dataContainer}>
                     <Button
                       mode="contained"
                       uppercase={true}
@@ -192,7 +208,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 18,
     fontWeight: "bold",
-    marginBottom: 5,
+    marginBottom: 20,
   },
   content: {
     fontSize: 16,

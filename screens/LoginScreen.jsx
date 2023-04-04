@@ -18,7 +18,8 @@ export default function LoginScreen({ navigation }) {
 
   const styles = StyleSheet.create({
     container: {
-      paddingHorizontal: 15,
+      paddingTop: 50,
+      paddingHorizontal: 25,
       flex: 1,
     },
     logo: {
