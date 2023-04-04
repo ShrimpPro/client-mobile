@@ -17,7 +17,7 @@ export default function HistoryScreen() {
       {
         loading ? <LoadingSpinner /> : <>
           {
-            pond && pond?.pH && pond?.temp ? <>
+            pond && pond?.pH !== null && pond?.pH !== undefined && pond?.temp !== null && pond?.temp !== undefined ? <>
               <SelectPond />
               <View style={styles.contentContainer}>
                 <Swiper style={styles.wrapper} loop={false} showsPagination={false}>
@@ -29,7 +29,9 @@ export default function HistoryScreen() {
                   </View>
                 </Swiper>
               </View>
-            </> : <NoDevice />
+            </> : <View style={{ flex: 1, justifyContent: 'center' }}>
+              <NoDevice />
+            </View>
           }
         </>
       }

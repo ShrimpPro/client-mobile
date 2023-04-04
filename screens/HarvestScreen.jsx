@@ -20,7 +20,7 @@ export default function HarvestScreen({ navigation }) {
           <LoadingSpinner />
         ) : (
           <>
-            {pond && pond?.pH && pond?.temp ? (
+            {pond && pond?.pH !== null && pond?.pH !== undefined && pond?.temp !== null && pond?.temp !== undefined ? (
               <>
                 <ScrollView showsVerticalScrollIndicator={false}>
                   <SelectPond />
@@ -52,7 +52,9 @@ export default function HarvestScreen({ navigation }) {
                 </ScrollView>
               </>
             ) : (
-              <NoDevice />
+              <View style={{ height: '100%' , justifyContent: 'center' }}>
+                <NoDevice />
+              </View>
             )}
           </>
         )}
