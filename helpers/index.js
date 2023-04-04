@@ -1,9 +1,10 @@
-export const formatDate = (date) => date.split('T')[0];
-export const formatMoney = (money) => new Intl.NumberFormat('id-ID', {
-  style: 'currency',
-  currency: 'IDR',
-  minimumFractionDigits: 0,
-}).format(money);
+export const formatDate = (date) => date.split("T")[0];
+export const formatMoney = (money) =>
+  new Intl.NumberFormat("id-ID", {
+    style: "currency",
+    currency: "IDR",
+    minimumFractionDigits: 0,
+  }).format(money);
 
 export const phColor = (pH) => {
   let color;
@@ -17,7 +18,7 @@ export const phColor = (pH) => {
     color = "#ff0303";
   }
   return color;
-}
+};
 
 export const phCategory = (pH) => {
   let category;
@@ -31,7 +32,7 @@ export const phCategory = (pH) => {
     category = "Bahaya";
   }
   return category;
-}
+};
 
 export const tempColor = (temp) => {
   let color;
@@ -43,7 +44,7 @@ export const tempColor = (temp) => {
     color = "#ff0303";
   }
   return color;
-}
+};
 
 export const tempCategory = (temp) => {
   let category;
@@ -55,53 +56,55 @@ export const tempCategory = (temp) => {
     category = "Bahaya";
   }
   return category;
-}
+};
 
 export const categoryColor = (category) => {
   let color;
-  if (category === 'Baik') {
+  if (category === "Baik") {
     color = "#08b608";
-  } else if (category === 'Cukup') {
+  } else if (category === "Cukup") {
     color = "#ffa500";
   } else {
     color = "#ff0303";
   }
   return color;
-}
+};
 
 export const pondCategory = (ponds) => {
-  if (ponds.length > 1) return 'Tambak besar';
-  return 'Tambak kecil'
-}
+  if (ponds.length > 1) return "Tambak besar";
+  return "Tambak kecil";
+};
 
-export const capitalizeFirstLetter = (word) => word[0].toUpperCase() + word.slice(1);
+export const capitalizeFirstLetter = (word) =>
+  word[0].toUpperCase() + word.slice(1);
 
-export const dateToHours = (date) => date.split('T')[1].split('.')[0].slice(0, -3);
+export const dateToHours = (date) =>
+  date.split("T")[1].split(".")[0].slice(0, -3);
 export const dateToMonth = (date) => {
-  const day = date.getDate().toString().padStart(2, '0');
-  const month = (date.getMonth() + 1).toString().padStart(2, '0');
+  const day = date.getDate().toString().padStart(2, "0");
+  const month = (date.getMonth() + 1).toString().padStart(2, "0");
   return `${day}/${month}`;
-}
+};
 
 export const historyDates = (histories) => {
   const dates = [];
-  histories?.forEach(el => {
+  histories?.forEach((el) => {
     dates.push(dateToHours(el.createdAt));
-  })
+  });
   return dates;
-}
+};
 
 export const netProfit = (capital, earning) => earning - capital;
 export const profitPerMillion = (profit) => {
-  const result = (profit / 1000000);
+  const result = profit / 1000000;
   return result;
-}
+};
 
 export const harvestDates = (harvests) => {
   const dates = [];
-  harvests?.forEach(el => {
+  harvests?.forEach((el) => {
     const date = new Date(el.createdAt);
     dates.push(dateToMonth(date));
-  })
+  });
   return dates;
-}
+};
