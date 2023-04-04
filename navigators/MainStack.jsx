@@ -9,6 +9,7 @@ import MitraListScreen from "../screens/MitraListScreen";
 import AddHarvestScreen from "../screens/AddHarvestScreen";
 import HarvestDetailScreen from "../screens/HarvestDetailScreen";
 import PaymentScreen from "../screens/PaymentScreen";
+import ProfileScreen from "../screens/ProfileScreen";
 
 export default function MainStack() {
   return (
@@ -31,6 +32,7 @@ export default function MainStack() {
       <Stack.Screen name="Tambah Panen" component={AddHarvestScreen} />
       <Stack.Screen name="Detail Harvest" component={HarvestDetailScreen} />
       <Stack.Screen name="Payment" component={PaymentScreen} />
+      <Stack.Screen name="Profile" component={ProfileScreen} />
     </Stack.Navigator>
   );
 }
