@@ -43,7 +43,7 @@ export default function ProfileScreen({ navigation }) {
   };
 
   const handleEditProfile = () => {
-    navigation.navigate("Edit Profile", { id: user._id })
+    navigation.navigate("Edit Profile", { id: user._id });
   };
 
   return (
@@ -53,7 +53,7 @@ export default function ProfileScreen({ navigation }) {
       ) : (
         <>
           <SafeAreaView style={styles.container}>
-            <View style={{ marginTop: 20 }}>
+            <View style={{ marginTop: 35 }}>
               <ScrollView
                 onScroll={({ nativeEvent }) => onchange(nativeEvent)}
                 showsHorizontalScrollIndicator={false}
@@ -85,8 +85,14 @@ export default function ProfileScreen({ navigation }) {
                 <Card.Content>
                   <View style={styles.dataContainerRow}>
                     {/* <Text style={styles.title}>{user?.name}</Text> */}
-                    <Chip mode="outlined"><Text>{user?.name}</Text></Chip>
-                    <Chip><Text>{user?.ponds ? pondCategory(user?.ponds) : ""}</Text></Chip>
+                    <Chip mode="outlined">
+                      <Text>{user?.name}</Text>
+                    </Chip>
+                    <Chip>
+                      <Text>
+                        {user?.ponds ? pondCategory(user?.ponds) : ""}
+                      </Text>
+                    </Chip>
                   </View>
                   <View style={styles.dataContainer}>
                     <View style={{ flexDirection: "row" }}>

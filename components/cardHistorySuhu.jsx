@@ -14,8 +14,13 @@ export default function SuhuCard({ data }) {
           <View style={styles.suhuContainer}>
             <Text variant="titleMedium">{data.temp}°C</Text>
           </View>
-          <View style={[styles.footerContainer, { backgroundColor: tempColor(data.temp) }]}>
-            <Text variant="titleMedium" style={{ color: 'white' }}>
+          <View
+            style={[
+              styles.footerContainer,
+              { backgroundColor: tempColor(data.temp) },
+            ]}
+          >
+            <Text variant="titleMedium" style={{ color: "white" }}>
               {tempCategory(data.temp)}
             </Text>
           </View>
@@ -28,13 +33,13 @@ export default function SuhuCard({ data }) {
 const styles = StyleSheet.create({
   container: {
     marginBottom: 10,
-    width: 350
+    width: 350,
   },
   card: {
     backgroundColor: "white",
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center'
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
   },
   dateContainer: {
     flexDirection: "row",
@@ -42,7 +47,7 @@ const styles = StyleSheet.create({
   },
   footerContainer: {
     width: 100,
-    alignItems: 'center',
+    alignItems: "center",
     paddingVertical: 10,
     paddingHorizontal: 15,
     borderRadius: 7,
