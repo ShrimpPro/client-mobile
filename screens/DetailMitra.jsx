@@ -14,7 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchUserDetail } from "../store/actions/actionUser";
 import { useRoute } from "@react-navigation/native";
 import LoadingSpinner from "../components/LoadingSpinner";
-import { capitalizeFirstLetter, pondCategory } from "../helpers";
+import { capitalizeFirstLetterAndLowerTheRest, pondCategory } from "../helpers";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 
@@ -106,7 +106,7 @@ export default function DetailMitra() {
                     <Text style={styles.title}>Membership:</Text>
                     <Text style={styles.content}>
                       {user?.membership
-                        ? capitalizeFirstLetter(user?.membership)
+                        ? capitalizeFirstLetterAndLowerTheRest(user?.membership)
                         : ""}
                     </Text>
                   </View>

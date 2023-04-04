@@ -16,7 +16,7 @@ export default function MitraCard({ data, navigation }) {
               style={{ flexDirection: "row", justifyContent: "space-between" }}
             >
               <View>
-                {data.membership === "premium" ? (
+                {data.membership === "PREMIUM" ? (
                   <Chip icon="check-decagram" style={{ backgroundColor: "white" }}>{data.name}</Chip>
                 ) : (
                   <Chip style={{ backgroundColor: "white" }}>{data.name}</Chip>
