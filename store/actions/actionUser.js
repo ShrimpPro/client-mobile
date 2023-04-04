@@ -122,3 +122,18 @@ export const fetchCurrentUser = () => {
     }
   };
 };
+
+export function putEditProfile(id, inputEdit) {
+  return async (dispatch, getState) => {
+    try {
+      const { data: user } = await axios.put(
+        baseUrl + "users/" + id,
+        inputEdit
+      );
+      dispatch(fetchCurrentUser());
+      return user;
+    } catch (error) {
+      throw error;
+    }
+  };
+}
