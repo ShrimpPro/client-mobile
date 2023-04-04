@@ -18,7 +18,7 @@ import { capitalizeFirstLetter, pondCategory } from "../helpers";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 
-export default function ProfileScreen() {
+export default function ProfileScreen({ navigation }) {
   const [img, setImg] = useState(0);
   const { user, loading } = useSelector((state) => state.users);
   const dispatch = useDispatch();
@@ -36,6 +36,14 @@ export default function ProfileScreen() {
         setImg(slide);
       }
     }
+  };
+
+  const handleBuyMembership = () => {
+    navigation.navigate("Order");
+  };
+
+  const handleEditProfile = () => {
+    navigation.navigate("Edit Profile", { id: user._id })
   };
 
   return (
@@ -111,7 +119,7 @@ export default function ProfileScreen() {
                         mode="contained"
                         uppercase={true}
                         style={{ borderRadius: 5 }}
-                        onPress={() => {}}
+                        onPress={handleBuyMembership}
                       >
                         Buy Membership
                       </Button>
@@ -122,7 +130,7 @@ export default function ProfileScreen() {
                       mode="contained"
                       uppercase={true}
                       style={{ borderRadius: 5 }}
-                      onPress={() => {}}
+                      onPress={handleEditProfile}
                     >
                       Edit Profile
                     </Button>
