@@ -105,3 +105,41 @@ export const harvestDates = (harvests) => {
   })
   return dates;
 }
+
+export const dummyGraph = [
+  {
+    temp: 0,
+    pH: 0,
+    createdAt: JSON.stringify(new Date())
+  },
+  {
+    temp: 0,
+    pH: 0,
+    createdAt: JSON.stringify(new Date())
+  },
+  {
+    temp: 0,
+    pH: 0,
+    createdAt: JSON.stringify(new Date())
+  },
+  {
+    temp: 0,
+    pH: 0,
+    createdAt: JSON.stringify(new Date())
+  },
+  {
+    temp: 0,
+    pH: 0,
+    createdAt: JSON.stringify(new Date())
+  },
+  {
+    temp: 0,
+    pH: 0,
+    createdAt: JSON.stringify(new Date())
+  },
+  {
+    temp: 0,
+    pH: 0,
+    createdAt: JSON.stringify(new Date())
+  }
+]

@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, View, Text, ScrollView } from "react-native";
 import { LineChart } from "react-native-chart-kit";
-import { historyDates } from "../helpers";
+import { dummyGraph, historyDates } from "../helpers";
 
 export default function Graph({ histories }) {
+  const [hist, setHist] = useState([]);
+
+  useEffect(() => {
+    if (histories.length === 0) setHist(dummyGraph);
+    else setHist(histories)
+  }, [])
+
   return (
     <View>
       <ScrollView
@@ -11,18 +18,18 @@ export default function Graph({ histories }) {
         pagingEnabled
         showsHorizontalScrollIndicator={false}
       >
-        <View>
-          {histories ? (
-            <>
+        {
+          hist?.length > 0 && <>
+             <View>
               <Text variant="headlineMedium" style={styles.textHeader}>
                 Grafik Suhu
               </Text>
               <LineChart
                 data={{
-                  labels: historyDates(histories),
+                  labels: historyDates(hist),
                   datasets: [
                     {
-                      data: histories.map(({ temp }) => temp),
+                      data: hist.map(({ temp }) => temp),
                     },
                   ],
                 }}
@@ -54,14 +61,8 @@ export default function Graph({ histories }) {
                   marginHorizontal: 20,
                 }}
               />
-            </>
-          ) : (
-            <></>
-          )}
-        </View>
-        <View>
-          {histories ? (
-            <>
+            </View>
+            {/* <View>
               <Text variant="headlineMedium" style={styles.textHeader}>
                 Grafik PH
               </Text>
@@ -102,11 +103,9 @@ export default function Graph({ histories }) {
                   marginHorizontal: 20,
                 }}
               />
-            </>
-          ) : (
-            <></>
-          )}
-        </View>
+            </View> */}
+          </>
+        }
       </ScrollView>
     </View>
   );

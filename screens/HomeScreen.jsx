@@ -12,14 +12,11 @@ import { fetchPondDetail, fetchPonds } from "../store/actions/actionPond";
 import LoadingSpinner from "../components/LoadingSpinner";
 import SelectPond from "../components/SelectPond";
 import NoDevice from "../components/NoDevice";
-import { Appbar, useTheme } from "react-native-paper";
 
 export default function HomeScreen() {
   const [loading, setLoading] = useState(false);
   const { pond, loading: pondLoading } = useSelector((state) => state.ponds);
   const dispatch = useDispatch();
-  const { bottom } = useSafeAreaInsets();
-  const theme = useTheme();
 
   useEffect(() => {
     setLoading(true);
@@ -43,7 +40,7 @@ export default function HomeScreen() {
           </View>
         ) : (
           <View>
-            {pond && pond?.pH && pond?.temp ? (
+            {pond && pond?.pH !== null && pond?.pH !== undefined && pond?.temp !== null && pond?.temp !== undefined ? (
               <>
                 <SelectPond />
                 <View style={styles.contentContainer}>
@@ -62,7 +59,9 @@ export default function HomeScreen() {
                 </View>
               </>
             ) : (
-              <NoDevice />
+              <View style={{ height: '100%', justifyContent: 'center' }}>
+                <NoDevice />
+              </View>
             )}
           </View>
         )}

@@ -39,7 +39,7 @@ export default function ProfileScreen({ navigation }) {
   };
 
   const handleBuyMembership = () => {
-    navigation.navigate("Order");
+    navigation.navigate("Category");
   };
 
   const handleEditProfile = () => {
@@ -148,6 +148,7 @@ export default function ProfileScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingTop: 20
   },
   wrap: {
     width: 350,

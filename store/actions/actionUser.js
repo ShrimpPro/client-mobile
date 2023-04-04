@@ -115,7 +115,6 @@ export const fetchCurrentUser = () => {
       });
       dispatch({ type: FETCH_USER_DETAIL, payload: user });
       dispatch({ type: CHANGE_LOADING_USERS, payload: false });
-      console.log(user);
       return user;
     } catch (error) {
       throw error;
