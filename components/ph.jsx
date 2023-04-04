@@ -21,9 +21,6 @@ export default function PH({ pH }) {
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "flex-start",
     paddingVertical: 4,
     paddingHorizontal: 6,
     fontSize: 15,
@@ -40,10 +37,8 @@ const styles = StyleSheet.create({
       width: 0,
       height: 2,
     },
-
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
-
     elevation: 5,
   },
   text: {

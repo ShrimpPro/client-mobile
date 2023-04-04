@@ -38,24 +38,29 @@ export default function HomeScreen() {
     <>
       <SafeAreaView style={styles.container}>
         {loading || pondLoading ? (
-          <LoadingSpinner />
+          <View style={{ flex: 1, justifyContent: 'center' }}>
+            <LoadingSpinner />
+          </View>
         ) : (
           <View>
             {pond && pond?.pH && pond?.temp ? (
-              <View>
+              <>
                 <SelectPond />
-                <Graph histories={pond?.histories} />
-                <View
-                  style={{
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    paddingHorizontal: 15,
-                  }}
-                >
-                  <PH pH={pond?.pH} />
-                  <Temperature temp={pond?.temp} />
+                <View style={styles.contentContainer}>
+                  <Graph histories={pond?.histories} />
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      justifyContent: "space-between",
+                      paddingHorizontal: 15,
+                      paddingTop: 50
+                    }}
+                  >
+                    <PH pH={pond?.pH} />
+                    <Temperature temp={pond?.temp} />
+                  </View>
                 </View>
-              </View>
+              </>
             ) : (
               <NoDevice />
             )}
@@ -69,7 +74,9 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    marginTop: 40
   },
+  contentContainer: {
+    justifyContent: 'space-around'
+  }
 });

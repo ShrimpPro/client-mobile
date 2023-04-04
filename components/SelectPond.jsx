@@ -3,8 +3,6 @@ import React, { useEffect, useState } from "react";
 import { Picker } from "@react-native-picker/picker";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchPondDetail, fetchPonds } from "../store/actions/actionPond";
-import { Button } from "react-native-paper";
-import { ScrollView } from "react-native-gesture-handler";
 
 export default function SelectPond() {
   const [selectedValue, setSelectedValue] = useState("");
@@ -24,8 +22,7 @@ export default function SelectPond() {
   };
 
   return (
-    <View>
-      <Text style={{ alignSelf: "center" }}>Switch Pond:</Text>
+    <View style={styles.container}>
       <View style={styles.selectOption}>
         <Picker
           selectedValue={selectedValue}
@@ -35,7 +32,7 @@ export default function SelectPond() {
             return (
               <Picker.Item
                 key={pond._id}
-                label={`${index + 1}`}
+                label={`Kolam ${index + 1}`}
                 value={pond._id}
               />
             );
@@ -44,28 +41,15 @@ export default function SelectPond() {
       </View>
     </View>
   );
-  {
-    /* <ScrollView horizontal={true}>
-        {ponds.map((ponds, index) => {
-          return (
-            <Button
-              mode="contained"
-              onPress={(value, index) => {
-                changePond(value);
-              }}
-            >
-              {index + 1}
-            </Button>
-          );
-        })}
-      </ScrollView>
-    </View> */
-  }
 }
 
 const styles = StyleSheet.create({
+  container: {
+    marginHorizontal: 20,
+    marginBottom: 20
+  },
   selectOption: {
-    width: 200,
+    width: '100%',
     height: 50,
     backgroundColor: "#FFFFFF",
     borderRadius: 10,

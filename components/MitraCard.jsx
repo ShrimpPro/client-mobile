@@ -4,7 +4,6 @@ import { Button, Card, Chip, Text } from "react-native-paper";
 import { pondCategory } from "../helpers";
 
 export default function MitraCard({ data, navigation }) {
-  console.log(data);
   return (
     <View style={styles.container}>
       <TouchableOpacity

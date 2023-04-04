@@ -5,18 +5,18 @@ import { historyDates } from "../helpers";
 
 export default function Graph({ histories }) {
   return (
-    <View style={{ flex: 1 }}>
+    <View>
       <ScrollView
         horizontal={true}
         pagingEnabled
         showsHorizontalScrollIndicator={false}
       >
         <View>
-          <Text variant="headlineMedium" style={styles.textHeader}>
-            Grafik Suhu
-          </Text>
           {histories ? (
             <>
+              <Text variant="headlineMedium" style={styles.textHeader}>
+                Grafik Suhu
+              </Text>
               <LineChart
                 data={{
                   labels: historyDates(histories),
@@ -60,11 +60,11 @@ export default function Graph({ histories }) {
           )}
         </View>
         <View>
-          <Text variant="headlineMedium" style={styles.textHeader}>
-            Grafik PH
-          </Text>
           {histories ? (
             <>
+              <Text variant="headlineMedium" style={styles.textHeader}>
+                Grafik PH
+              </Text>
               <LineChart
                 data={{
                   labels: historyDates(histories),
@@ -129,7 +129,8 @@ const styles = StyleSheet.create({
   },
   textHeader: {
     textAlign: "center",
-    fontSize: 20,
-    marginTop: 10,
+    fontSize: 24,
+    marginVertical: 10,
+    fontWeight: "bold"
   },
 });
