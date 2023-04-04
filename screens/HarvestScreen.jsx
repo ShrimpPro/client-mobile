@@ -20,14 +20,14 @@ export default function HarvestScreen({ navigation }) {
           <LoadingSpinner />
         ) : (
           <>
-            <View>
-              <Text variant="headlineMedium" style={styles.headers}>
-                List Panen
-              </Text>
-            </View>
             {pond && pond?.pH !== null && pond?.pH !== undefined && pond?.temp !== null && pond?.temp !== undefined ? (
               <>
                 <ScrollView showsVerticalScrollIndicator={false}>
+                  <View>
+                    <Text variant="headlineMedium" style={styles.headers}>
+                      List Panen
+                    </Text>
+                  </View>
                   <SelectPond />
                   <View style={styles.contentContainer}>
                     <Button

@@ -47,6 +47,7 @@ export default function RegisterScreen({ navigation }) {
         label="Name"
         value={inputRegister.name}
         mode="outlined"
+        autoCapitalize="none"
         onChangeText={(value) => changeInput("name", value)}
         style={{ marginBottom: 20 }}
       />
@@ -55,6 +56,7 @@ export default function RegisterScreen({ navigation }) {
         label="Email"
         value={inputRegister.email}
         mode="outlined"
+        autoCapitalize="none"
         onChangeText={(value) => changeInput("email", value)}
         style={{ marginBottom: 20 }}
       />
@@ -62,6 +64,7 @@ export default function RegisterScreen({ navigation }) {
         label="Password"
         value={inputRegister.password}
         mode="outlined"
+        autoCapitalize="none"
         secureTextEntry={true}
         onChangeText={(value) => changeInput("password", value)}
         style={{ marginBottom: 20 }}
@@ -70,6 +73,8 @@ export default function RegisterScreen({ navigation }) {
         label="Phone Numnber"
         value={inputRegister.phoneNumber}
         mode="outlined"
+        autoCapitalize="none"
+        keyboardType="number-pad"
         onChangeText={(value) => changeInput("phoneNumber", value)}
         style={{ marginBottom: 20 }}
       />
@@ -77,6 +82,7 @@ export default function RegisterScreen({ navigation }) {
         label="Address"
         value={inputRegister.address}
         mode="outlined"
+        autoCapitalize="none"
         onChangeText={(value) => changeInput("address", value)}
         style={{ marginBottom: 30 }}
       />

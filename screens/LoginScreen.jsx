@@ -82,6 +82,7 @@ export default function LoginScreen({ navigation }) {
           label="Email"
           value={inputLogin.email}
           mode="outlined"
+          autoCapitalize="none"
           onChangeText={(value) => changeInput("email", value)}
           style={{ marginBottom: 10, fontFamily: "Poppins" }}
         />
@@ -89,6 +90,7 @@ export default function LoginScreen({ navigation }) {
           label="Password"
           value={inputLogin.password}
           mode="outlined"
+          autoCapitalize="none"
           secureTextEntry={true}
           onChangeText={(value) => changeInput("password", value)}
           style={{ marginBottom: 15 }}
