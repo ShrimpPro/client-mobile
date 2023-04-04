@@ -20,6 +20,11 @@ export default function HarvestScreen({ navigation }) {
           <LoadingSpinner />
         ) : (
           <>
+            <View>
+              <Text variant="headlineMedium" style={styles.headers}>
+                List Panen
+              </Text>
+            </View>
             {pond && pond?.pH !== null && pond?.pH !== undefined && pond?.temp !== null && pond?.temp !== undefined ? (
               <>
                 <ScrollView showsVerticalScrollIndicator={false}>
@@ -66,7 +71,7 @@ export default function HarvestScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 40
+    marginTop: 40,
   },
   contentContainer: {
     paddingHorizontal: 20,
@@ -75,11 +80,18 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   graphContainer: {
-    marginVertical: 10
+    marginVertical: 10,
   },
   button: {
     borderRadius: 5,
     fontWeight: "bold",
-    paddingVertical: 5
+    paddingVertical: 5,
+  },
+  headers: {
+    alignItems: "center",
+    marginBottom: 17,
+    textAlign: "center",
+    fontSize: 20,
+    fontWeight: "bold",
   },
 });

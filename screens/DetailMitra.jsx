@@ -46,7 +46,7 @@ export default function DetailMitra() {
       ) : (
         <>
           <SafeAreaView style={styles.container}>
-            <View style={{ marginTop: 20 }}>
+            <View style={{ marginTop: 35 }}>
               <ScrollView
                 onScroll={({ nativeEvent }) => onchange(nativeEvent)}
                 showsHorizontalScrollIndicator={false}
@@ -123,7 +123,7 @@ export default function DetailMitra() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 30
+    paddingTop: 30,
   },
   wrap: {
     width: 350,

@@ -1,26 +1,37 @@
-import React from 'react';
-import { StyleSheet, View } from 'react-native';
-import Swiper from 'react-native-swiper';
-import HistorySuhu from './screenhistorysuhu';
-import ScreenHistoryPh from './screenhistoryPh';
-import { useSelector } from 'react-redux';
-import SelectPond from '../components/SelectPond';
-import LoadingSpinner from '../components/LoadingSpinner';
-import NoDevice from '../components/NoDevice';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import React from "react";
+import { StyleSheet, View, Text } from "react-native";
+import Swiper from "react-native-swiper";
+import HistorySuhu from "./screenhistorysuhu";
+import ScreenHistoryPh from "./screenhistoryPh";
+import { useSelector } from "react-redux";
+import SelectPond from "../components/SelectPond";
+import LoadingSpinner from "../components/LoadingSpinner";
+import NoDevice from "../components/NoDevice";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function HistoryScreen() {
   const { pond, loading } = useSelector((state) => state.ponds);
 
   return (
     <SafeAreaView style={styles.container}>
-      {
-        loading ? <LoadingSpinner /> : <>
-          {
-            pond && pond?.pH !== null && pond?.pH !== undefined && pond?.temp !== null && pond?.temp !== undefined ? <>
+      {loading ? (
+        <LoadingSpinner />
+      ) : (
+        <>
+          {pond && pond?.pH !== null && pond?.pH !== undefined && pond?.temp !== null && pond?.temp !== undefined ? (
+            <>
+              <View>
+                <Text variant="headlineMedium" style={styles.headers}>
+                  History
+                </Text>
+              </View>
               <SelectPond />
               <View style={styles.contentContainer}>
-                <Swiper style={styles.wrapper} loop={false} showsPagination={false}>
+                <Swiper
+                  style={styles.wrapper}
+                  loop={false}
+                  showsPagination={false}
+                >
                   <View style={styles.slide}>
                     <HistorySuhu histories={pond?.histories} />
                   </View>
@@ -29,12 +40,14 @@ export default function HistoryScreen() {
                   </View>
                 </Swiper>
               </View>
-            </> : <View style={{ flex: 1, justifyContent: 'center' }}>
+            </>
+          ) : (
+            <View style={{ flex: 1, justifyContent: 'center' }}>
               <NoDevice />
             </View>
-          }
+          )}
         </>
-      }
+      )}
     </SafeAreaView>
   );
 }
@@ -42,15 +55,22 @@ export default function HistoryScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 40
+    marginTop: 35,
   },
   wrapper: {},
   slide: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   contentContainer: {
-    height: '100%'
-  }
+    height: "100%",
+  },
+  headers: {
+    alignItems: "center",
+    marginBottom: 20,
+    textAlign: "center",
+    fontSize: 20,
+    fontWeight: "bold",
+  },
 });
