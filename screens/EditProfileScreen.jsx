@@ -1,22 +1,33 @@
 import { StyleSheet, Image, View } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { TextInput, Switch, Button, Text } from "react-native-paper";
 import * as Font from "expo-font";
-import { postRegister, putEditProfile } from "../store/actions/actionUser";
-import { useDispatch } from "react-redux";
+import { fetchUserDetail, postRegister, putEditProfile } from "../store/actions/actionUser";
+import { useDispatch, useSelector } from "react-redux";
 import { useRoute } from "@react-navigation/native";
 
 export default function EditProfileScreen({ navigation }) {
   const dispatch = useDispatch();
   const [inputEditProfile, setInputEditProfile] = useState({
     name: "",
-    password: "",
     phoneNumber: "",
     address: ""
   });
 
   const { id } = useRoute().params;
+
+  useEffect(() => {
+    dispatch(fetchUserDetail(id))
+      .then(user => {
+        setInputEditProfile({
+          name: user.name,
+          phoneNumber: user.phoneNumber,
+          address: user.address
+        })
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   const changeInput = (key, value) => {
     let newInput = {
@@ -34,25 +45,24 @@ export default function EditProfileScreen({ navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
+      <View style={{ alignItems: 'center', marginBottom: 30 }}>
+        <Text variant="headlineMedium" style={styles.headers}>
+          Edit Profile
+        </Text>
+      </View>
       <TextInput
         label="Name"
         value={inputEditProfile.name}
         mode="outlined"
+        autoCapitalize="none"
         onChangeText={(value) => changeInput("name", value)}
-        style={{ marginBottom: 20 }}
-      />
-      <TextInput
-        label="Password"
-        value={inputEditProfile.password}
-        mode="outlined"
-        secureTextEntry={true}
-        onChangeText={(value) => changeInput("password", value)}
         style={{ marginBottom: 20 }}
       />
       <TextInput
         label="Phone Number"
         value={inputEditProfile.phoneNumber}
         mode="outlined"
+        keyboardType="numeric"
         onChangeText={(value) => changeInput("phoneNumber", value)}
         style={{ marginBottom: 20 }}
       />
@@ -60,6 +70,7 @@ export default function EditProfileScreen({ navigation }) {
         label="Address"
         value={inputEditProfile.address}
         mode="outlined"
+        autoCapitalize="none"
         onChangeText={(value) => changeInput("address", value)}
         style={{ marginBottom: 30 }}
       />
@@ -78,7 +89,7 @@ export default function EditProfileScreen({ navigation }) {
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 15,
+    paddingHorizontal: 25,
     flex: 1,
     justifyContent: "center",
   },
@@ -99,4 +110,7 @@ const styles = StyleSheet.create({
   register: {
     color: "purple",
   },
+  headers: {
+    fontWeight: "700"
+  }
 });
