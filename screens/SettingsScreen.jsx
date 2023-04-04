@@ -1,4 +1,4 @@
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Card, Chip, IconButton, Text } from "react-native-paper";
 import Icon from "react-native-vector-icons/MaterialIcons";
@@ -7,7 +7,6 @@ import { CommonActions } from "@react-navigation/native";
 import { useDispatch } from "react-redux";
 import { resetPonds } from "../store/actions/actionPond";
 import { resetUsers } from "../store/actions/actionUser";
-import { TouchableOpacity } from "react-native-gesture-handler";
 
 export default function SettingsScreen({ navigation }) {
   const dispatch = useDispatch();
@@ -60,5 +59,6 @@ export default function SettingsScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 15,
+    paddingTop: 20
   },
 });

@@ -48,12 +48,7 @@ export default function NoDevice() {
 const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
-    alignItems: 'center',
-    position: 'absolute',
-    right: 50,
-    left: 50,
-    top: 50,
-    bottom: 50
+    alignItems: 'center'
   },
   category: {
     flexDirection: 'row',

@@ -123,6 +123,7 @@ export default function DetailMitra() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingTop: 30
   },
   wrap: {
     width: 350,

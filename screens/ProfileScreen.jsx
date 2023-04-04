@@ -77,8 +77,8 @@ export default function ProfileScreen() {
                 <Card.Content>
                   <View style={styles.dataContainerRow}>
                     {/* <Text style={styles.title}>{user?.name}</Text> */}
-                    <Chip mode="outlined">{user?.name}</Chip>
-                    <Chip>{user?.ponds ? pondCategory(user?.ponds) : ""}</Chip>
+                    <Chip mode="outlined"><Text>{user?.name}</Text></Chip>
+                    <Chip><Text>{user?.ponds ? pondCategory(user?.ponds) : ""}</Text></Chip>
                   </View>
                   <View style={styles.dataContainer}>
                     <View style={{ flexDirection: "row" }}>
@@ -105,7 +105,7 @@ export default function ProfileScreen() {
                   <View style={styles.dataContainer}>
                     <Text style={styles.title}>Membership:</Text>
                     {user?.membership ? (
-                      capitalizeFirstLetter(user?.membership)
+                      <Text>{capitalizeFirstLetter(user?.membership)}</Text>
                     ) : (
                       <Button
                         mode="contained"
