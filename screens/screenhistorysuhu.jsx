@@ -8,12 +8,6 @@ import SuhuCard from "../components/cardHistorySuhu";
 export default function HistorySuhu({ histories }) {
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.headerContainer}>
-        <Text variant="headlineMedium" style={styles.textHeader}>
-          History Suhu
-        </Text>
-      </View>
-
       <View style={styles.contentContainer}>
         <FlatList
           showsVerticalScrollIndicator={false}

@@ -12,7 +12,7 @@ import PaymentScreen from "../screens/PaymentScreen";
 
 export default function MainStack() {
   return (
-    <Stack.Navigator initialRouteName="LandingPage">
+    <Stack.Navigator initialRouteName="Landing Page">
       <Stack.Screen
         name="Landing Page"
         options={{ headerShown: false }}
@@ -20,7 +20,11 @@ export default function MainStack() {
       />
       <Stack.Screen name="Login" component={LoginScreen} />
       <Stack.Screen name="Register" component={RegisterScreen} />
-      <Stack.Screen name="Dashboard" component={TabNavigator} />
+      <Stack.Screen
+        name="Dashboard"
+        options={{ headerShown: false }}
+        component={TabNavigator}
+      />
       <Stack.Screen name="Detail Mitra" component={DetailMitra} />
       <Stack.Screen name="List Mitra" component={MitraListScreen} />
       <Stack.Screen name="Tambah Panen" component={AddHarvestScreen} />

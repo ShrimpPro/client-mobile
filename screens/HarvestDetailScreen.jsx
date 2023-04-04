@@ -1,33 +1,97 @@
-import { SafeAreaView, StyleSheet, Text, View } from 'react-native'
-import React, { useEffect } from 'react'
-import { useRoute } from '@react-navigation/native'
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchHarvestDetail } from '../store/actions/actionPond';
+import { SafeAreaView, StyleSheet, Text, View } from "react-native";
+import React, { useEffect } from "react";
+import { useRoute } from "@react-navigation/native";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchHarvestDetail } from "../store/actions/actionPond";
+import { Card } from "react-native-paper";
+import LoadingSpinner from "../components/LoadingSpinner";
 
-export default function HarvestDetailScreen() {
+export default function HarvestDetailScreen({ navigation }) {
   const { id } = useRoute().params;
   const { harvest, loading } = useSelector((state) => state.ponds);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchHarvestDetail(id))
-      .catch((err) => console.log(err));
+    // navigation.setOptions({ title: data?.movieDetail.title });
+    dispatch(fetchHarvestDetail(id)).catch((err) => console.log(err));
   }, []);
+
+  if (loading) return <LoadingSpinner />;
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text>{harvest.capital}</Text>
-      <Text>{harvest.earning}</Text>
-      <Text>{harvest.quality}</Text>
-      <Text>{harvest.description}</Text>
+      {loading ? (
+        <LoadingSpinner />
+      ) : (
+        <View style={styles.contentContainer}>
+          <Card>
+            <Card.Content>
+              <View style={styles.dataContainer}>
+                <Text style={styles.title}>Modal Awal:</Text>
+                <Text style={styles.content}>{harvest.capital}</Text>
+              </View>
+              <View style={styles.dataContainer}>
+                <Text style={styles.title}>Pendapatan:</Text>
+                <Text style={styles.content}>{harvest.earning}</Text>
+              </View>
+              <View style={styles.dataContainer}>
+                <Text style={styles.title}>Kualitas:</Text>
+                <Text style={styles.content}>{harvest.quality}</Text>
+              </View>
+              <View style={styles.dataContainer}>
+                <Text style={styles.title}>Deskripsi:</Text>
+                <Text style={styles.content}>{harvest.description}</Text>
+              </View>
+            </Card.Content>
+          </Card>
+        </View>
+      )}
     </SafeAreaView>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
-  }
-})
+  },
+  wrap: {
+    width: 350,
+    height: 220,
+    marginVertical: 8,
+    borderRadius: 16,
+    marginHorizontal: 20,
+    marginBottom: 20,
+  },
+  wrapdot: {
+    flexDirection: "row",
+    alignSelf: "center",
+  },
+  dotActive: {
+    margin: 3,
+    color: "black",
+  },
+  dot: {
+    margin: 3,
+    color: "#808080",
+  },
+  textHeader: {
+    textAlign: "center",
+    fontSize: 25,
+    marginTop: 60,
+  },
+  dataContainer: {
+    marginBottom: 20,
+  },
+  title: {
+    fontSize: 18,
+    fontWeight: "bold",
+    marginBottom: 5,
+  },
+  content: {
+    fontSize: 16,
+  },
+  contentContainer: {
+    marginVertical: 25,
+    marginHorizontal: 20,
+  },
+});

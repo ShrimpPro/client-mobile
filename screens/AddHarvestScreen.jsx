@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { View, StyleSheet } from "react-native";
-import { Button, Text, TextInput } from "react-native-paper";
+import { Button, RadioButton, Text, TextInput } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useDispatch, useSelector } from "react-redux";
 import { createHarvest } from "../store/actions/actionPond";
@@ -26,8 +26,8 @@ export default function AddHarvestScreen({ navigation }) {
   const submitHarvest = () => {
     dispatch(createHarvest(inputAddHarvest, pond._id))
       .then(() => navigation.goBack())
-      .catch(err => console.log(err));
-  }
+      .catch((err) => console.log(err));
+  };
 
   return (
     <SafeAreaView style={styles.container}>
