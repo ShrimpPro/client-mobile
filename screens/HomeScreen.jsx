@@ -12,6 +12,7 @@ import { fetchPondDetail, fetchPonds } from "../store/actions/actionPond";
 import LoadingSpinner from "../components/LoadingSpinner";
 import SelectPond from "../components/SelectPond";
 import NoDevice from "../components/NoDevice";
+import PushNotification from "../components/PushNotification";
 
 export default function HomeScreen() {
   const [loading, setLoading] = useState(false);
@@ -57,6 +58,7 @@ export default function HomeScreen() {
                     <Temperature temp={pond?.temp} />
                   </View>
                 </View>
+                <PushNotification />
               </>
             ) : (
               <View style={{ height: '100%', justifyContent: 'center' }}>
