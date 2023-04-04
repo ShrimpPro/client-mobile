@@ -2,7 +2,7 @@ import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { BottomNavigation } from "react-native-paper";
 import HarvestScreen from "../screens/HarvestScreen";
-import SensorPhSuhu from "../screens/sensorphsuhu";
+import HomeScreen from "../screens/HomeScreen";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import SettingsScreen from "../screens/SettingsScreen";
 import HistoryScreen from "../screens/HistoryScreen";
@@ -59,7 +59,7 @@ export default function TabNavigator() {
     >
       <Tab.Screen
         name="Home"
-        component={SensorPhSuhu}
+        component={HomeScreen}
         options={{
           tabBarLabel: "Home",
           tabBarIcon: ({ color, size }) => {

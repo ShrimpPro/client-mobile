@@ -9,46 +9,51 @@ import GraphPanen from "../components/GraphListPanen";
 import SelectPond from "../components/SelectPond";
 import LoadingSpinner from "../components/LoadingSpinner";
 import NoDevice from "../components/NoDevice";
+import { ScrollView } from "react-native-gesture-handler";
 
 export default function HarvestScreen({ navigation }) {
   const { pond, loading } = useSelector((state) => state.ponds);
 
   return (
     <SafeAreaView style={styles.container}>
-      {
-        loading ? <LoadingSpinner /> : <>
-          {
-            pond && pond?.pH && pond?.temp ? <>
+      {loading ? (
+        <LoadingSpinner />
+      ) : (
+        <>
+          {pond && pond?.pH && pond?.temp ? (
+            <>
               <SelectPond />
-              <View style={styles.headerContainer}>
-                <Text variant="headlineMedium" style={styles.textHeader}>
-                  List Panen
-                </Text>
-              </View>
-              <Button
-                icon="check"
-                mode="contained"
-                onPress={() => navigation.navigate("Tambah Panen")}
-              >
-                Tambah Panen
-              </Button>
-              <View style={styles.graphContainer}>
-                <GraphPanen harvests={pond?.harvests}/>
-              </View>
-              <View style={styles.contentContainer}>
-                <FlatList
-                  showsVerticalScrollIndicator={false}
-                  data={pond?.harvests}
-                  keyExtractor={(data) => data._id}
-                  renderItem={({ item }) => {
-                    return <HarvestCard data={item} />;
-                  }}
-                />
-              </View>
-            </> : <NoDevice />
-          }
+              <ScrollView>
+                <Button
+                  icon="text-box-plus"
+                  mode="contained"
+                  style={styles.button}
+                  uppercase={true}
+                  onPress={() => navigation.navigate("Tambah Panen")}
+                >
+                  Tambah Panen
+                </Button>
+                <View style={styles.graphContainer}>
+                  <GraphPanen harvests={pond?.harvests} />
+                </View>
+                <View style={styles.contentContainer}>
+                  <FlatList
+                    showsVerticalScrollIndicator={false}
+                    scrollEnabled={false}
+                    data={pond?.harvests}
+                    keyExtractor={(data) => data._id}
+                    renderItem={({ item }) => {
+                      return <HarvestCard data={item} />;
+                    }}
+                  />
+                </View>
+              </ScrollView>
+            </>
+          ) : (
+            <NoDevice />
+          )}
         </>
-      }
+      )}
     </SafeAreaView>
   );
 }
@@ -56,7 +61,8 @@ export default function HarvestScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 10,
+    justifyContent: "center",
+    alignItems: "center",
   },
   headerContainer: {
     marginVertical: 6,
@@ -64,11 +70,11 @@ const styles = StyleSheet.create({
   textHeader: {
     textAlign: "center",
   },
-  contentContainer: {
-    marginTop: 160,
-  },
   graphContainer: {
     marginTop: 10,
-    paddingBottom: 80,
+  },
+  button: {
+    borderRadius: 5,
+    fontWeight: "bold",
   },
 });

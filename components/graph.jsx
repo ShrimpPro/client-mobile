@@ -6,13 +6,16 @@ import { historyDates } from "../helpers";
 export default function Graph({ histories }) {
   return (
     <View style={{ flex: 1 }}>
-      <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+      <ScrollView
+        horizontal={true}
+        pagingEnabled
+        showsHorizontalScrollIndicator={false}
+      >
         <View>
           <Text variant="headlineMedium" style={styles.textHeader}>
             Grafik Suhu
           </Text>
-          {
-            histories ?
+          {histories ? (
             <>
               <LineChart
                 data={{
@@ -33,7 +36,8 @@ export default function Graph({ histories }) {
                   backgroundGradientTo: "#25aff3",
                   decimalPlaces: 1,
                   color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-                  labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+                  labelColor: (opacity = 1) =>
+                    `rgba(255, 255, 255, ${opacity})`,
                   style: {
                     borderRadius: 16,
                   },
@@ -50,15 +54,16 @@ export default function Graph({ histories }) {
                   marginHorizontal: 20,
                 }}
               />
-            </> : <></>
-          }
+            </>
+          ) : (
+            <></>
+          )}
         </View>
         <View>
           <Text variant="headlineMedium" style={styles.textHeader}>
             Grafik PH
           </Text>
-          {
-            histories ?
+          {histories ? (
             <>
               <LineChart
                 data={{
@@ -79,7 +84,8 @@ export default function Graph({ histories }) {
                   backgroundGradientTo: "#25aff3",
                   decimalPlaces: 1,
                   color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-                  labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+                  labelColor: (opacity = 1) =>
+                    `rgba(255, 255, 255, ${opacity})`,
                   style: {
                     borderRadius: 16,
                   },
@@ -96,8 +102,10 @@ export default function Graph({ histories }) {
                   marginHorizontal: 20,
                 }}
               />
-            </> : <></>
-          }
+            </>
+          ) : (
+            <></>
+          )}
         </View>
       </ScrollView>
     </View>

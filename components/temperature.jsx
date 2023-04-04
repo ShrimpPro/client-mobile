@@ -21,9 +21,6 @@ export default function Temperature({ temp }) {
 
 const styles = StyleSheet.create({
   container: {
-    position: "absolute",
-    bottom: 90,
-    left: 24,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "flex-start",
