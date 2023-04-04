@@ -1,7 +1,7 @@
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 import React from "react";
 import { Button, Card, Chip, Text } from "react-native-paper";
-import { formatDate, formatMoney, netProfit } from "../helpers";
+import { categoryColor, formatDate, formatMoney, netProfit } from "../helpers";
 import { useNavigation } from "@react-navigation/native";
 
 export default function HarvestCard({ data }) {
@@ -15,15 +15,17 @@ export default function HarvestCard({ data }) {
         <Card mode="elevated" style={styles.card}>
           <Card.Content>
             <View
-              style={{ flexDirection: "row", justifyContent: "space-between" }}
+              style={styles.headerContainer}
             >
               <View>
                 <Text variant="titleLarge" style={{ fontWeight: "bold" }}>
-                  Panen {formatDate(data.createdAt)}
+                  {formatDate(data.createdAt)}
                 </Text>
               </View>
               <View>
-                <Chip>{data.quality}</Chip>
+                <Chip style={[styles.categoryContainer, { backgroundColor: categoryColor(data.quality) }]}>
+                  <Text style={styles.categoryText}>{data.quality}</Text>
+                </Chip>
               </View>
             </View>
             <View style={styles.footerContainer}>
@@ -56,4 +58,20 @@ const styles = StyleSheet.create({
   footerContainer: {
     marginTop: 5,
   },
+  headerContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: 'center'
+  },
+  categoryContainer: {
+    width: 100,
+    height: 40,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  categoryText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: "bold"
+  }
 });

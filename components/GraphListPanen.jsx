@@ -17,7 +17,7 @@ export default function GraphPanen({ harvests }) {
               },
             ],
           }}
-          width={370} // from react-native
+          width={350} // from react-native
           height={220}
           yAxisLabel="Rp "
           yAxisSuffix="jt"

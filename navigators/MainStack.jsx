@@ -13,17 +13,18 @@ import ProfileScreen from "../screens/ProfileScreen";
 
 export default function MainStack() {
   return (
-    <Stack.Navigator initialRouteName="Landing Page">
+    <Stack.Navigator
+      initialRouteName="Landing Page"
+      screenOptions={{ headerShown: false }}
+    >
       <Stack.Screen
         name="Landing Page"
-        options={{ headerShown: false }}
         component={WelcomeScreen}
       />
       <Stack.Screen name="Login" component={LoginScreen} />
       <Stack.Screen name="Register" component={RegisterScreen} />
       <Stack.Screen
         name="Dashboard"
-        options={{ headerShown: false }}
         component={TabNavigator}
       />
       <Stack.Screen name="Detail Mitra" component={DetailMitra} />

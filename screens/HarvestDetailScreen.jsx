@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchHarvestDetail } from "../store/actions/actionPond";
 import { Card } from "react-native-paper";
 import LoadingSpinner from "../components/LoadingSpinner";
+import { formatMoney, netProfit } from "../helpers";
 
 export default function HarvestDetailScreen({ navigation }) {
   const { id } = useRoute().params;
@@ -15,23 +16,27 @@ export default function HarvestDetailScreen({ navigation }) {
     dispatch(fetchHarvestDetail(id)).catch((err) => console.log(err));
   }, []);
 
-  if (loading) return <LoadingSpinner />;
-
   return (
     <SafeAreaView style={styles.container}>
       {loading ? (
-        <LoadingSpinner />
+        <View style={{ flex: 1, justifyContent: 'center' }}>
+          <LoadingSpinner />
+        </View>
       ) : (
         <View style={styles.contentContainer}>
           <Card>
             <Card.Content>
               <View style={styles.dataContainer}>
                 <Text style={styles.title}>Modal Awal:</Text>
-                <Text style={styles.content}>{harvest?.capital}</Text>
+                <Text style={styles.content}>{harvest.capital ? formatMoney(harvest.capital) : ''}</Text>
               </View>
               <View style={styles.dataContainer}>
                 <Text style={styles.title}>Pendapatan:</Text>
-                <Text style={styles.content}>{harvest?.earning}</Text>
+                <Text style={styles.content}>{harvest.earning ? formatMoney(harvest.earning) : ''}</Text>
+              </View>
+              <View style={styles.dataContainer}>
+                <Text style={styles.title}>Laba Bersih:</Text>
+                <Text style={styles.content}>{harvest.capital && harvest.earning ? formatMoney(netProfit(harvest.capital, harvest.earning)): ''}</Text>
               </View>
               <View style={styles.dataContainer}>
                 <Text style={styles.title}>Kualitas:</Text>
@@ -53,30 +58,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  wrap: {
-    width: 350,
-    height: 220,
-    marginVertical: 8,
-    borderRadius: 16,
-    marginHorizontal: 20,
-    marginBottom: 20,
-  },
-  wrapdot: {
-    flexDirection: "row",
-    alignSelf: "center",
-  },
-  dotActive: {
-    margin: 3,
-    color: "black",
-  },
-  dot: {
-    margin: 3,
-    color: "#808080",
-  },
   textHeader: {
     textAlign: "center",
     fontSize: 25,
-    marginTop: 60,
   },
   dataContainer: {
     marginBottom: 20,
@@ -92,5 +76,6 @@ const styles = StyleSheet.create({
   contentContainer: {
     marginVertical: 25,
     marginHorizontal: 20,
+    marginTop: 60
   },
 });
