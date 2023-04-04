@@ -24,22 +24,7 @@ export default function ScreenHistoryPh({ histories }) {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 10,
-  },
-  headerContainer: {
-    marginVertical: 10,
-  },
-  textHeader: {
-    textAlign: "center",
-    marginTop: 10,
-  },
   contentContainer: {
-    marginTop: 20,
-    paddingBottom: 80,
-  },
-  graphContainer: {
-    paddingBottom: 80,
+    paddingBottom: 60,
   },
 });

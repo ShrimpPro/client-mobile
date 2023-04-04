@@ -7,37 +7,40 @@ import { useSelector } from 'react-redux';
 import SelectPond from '../components/SelectPond';
 import LoadingSpinner from '../components/LoadingSpinner';
 import NoDevice from '../components/NoDevice';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function HistoryScreen() {
   const { pond, loading } = useSelector((state) => state.ponds);
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       {
         loading ? <LoadingSpinner /> : <>
           {
             pond && pond?.pH && pond?.temp ? <>
               <SelectPond />
-              <Swiper style={styles.wrapper} loop={false} showsPagination={false}>
-                <View style={styles.slide}>
-                  <HistorySuhu histories={pond?.histories} />
-                </View>
-                <View style={styles.slide}>
-                  <ScreenHistoryPh histories={pond?.histories} />
-                </View>
-              </Swiper>
+              <View style={styles.contentContainer}>
+                <Swiper style={styles.wrapper} loop={false} showsPagination={false}>
+                  <View style={styles.slide}>
+                    <HistorySuhu histories={pond?.histories} />
+                  </View>
+                  <View style={styles.slide}>
+                    <ScreenHistoryPh histories={pond?.histories} />
+                  </View>
+                </Swiper>
+              </View>
             </> : <NoDevice />
           }
         </>
       }
-    </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center'
+    marginTop: 40
   },
   wrapper: {},
   slide: {
@@ -45,4 +48,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  contentContainer: {
+    height: '100%'
+  }
 });
