@@ -25,7 +25,7 @@ export default function SelectPond() {
 
   return (
     <View>
-      <Text>Switch Pond:</Text>
+      <Text style={{ alignSelf: "center" }}>Switch Pond:</Text>
       <View style={styles.selectOption}>
         <Picker
           selectedValue={selectedValue}
@@ -78,5 +78,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowRadius: 3.84,
     elevation: 5,
+    alignSelf: "center"
   },
 });

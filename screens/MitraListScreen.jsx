@@ -9,59 +9,6 @@ import MitraCard from "../components/MitraCard";
 import { fetchUsers } from "../store/actions/actionUser";
 import LoadingSpinner from "../components/LoadingSpinner";
 
-const harvestData = [
-  {
-    id: 1,
-    name: "mitra1",
-    pound: "Tambak besar",
-  },
-  {
-    id: 2,
-    name: "mitra1",
-    pound: "Tambak besar",
-  },
-  {
-    id: 3,
-    name: "mitra1",
-    pound: "Tambak besar",
-  },
-  {
-    id: 4,
-    name: "mitra1",
-    pound: "Tambak besar",
-  },
-  {
-    id: 5,
-    name: "mitra1",
-    pound: "Tambak besar",
-  },
-  {
-    id: 6,
-    name: "mitra1",
-    pound: "Tambak besar",
-  },
-  {
-    id: 7,
-    name: "mitra1",
-    pound: "Tambak besar",
-  },
-  {
-    id: 8,
-    name: "mitra1",
-    pound: "Tambak besar",
-  },
-  {
-    id: 9,
-    name: "mitra1",
-    pound: "Tambak besar",
-  },
-  {
-    id: 10,
-    name: "mitra1",
-    pound: "Tambak besar",
-  },
-];
-
 export default function MitraListScreen({ navigation }) {
   const { users, loading } = useSelector((state) => state.users);
   const dispatch = useDispatch();

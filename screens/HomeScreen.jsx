@@ -4,7 +4,7 @@ import {
   SafeAreaView,
   useSafeAreaInsets,
 } from "react-native-safe-area-context";
-import Graph from "../components/Graph";
+import Graph from "../components/graph";
 import Temperature from "../components/temperature";
 import PH from "../components/ph";
 import { useDispatch, useSelector } from "react-redux";
@@ -36,16 +36,13 @@ export default function HomeScreen() {
 
   return (
     <>
-      <Appbar.Header>
-        <Appbar.Content title="Home" />
-      </Appbar.Header>
       <SafeAreaView style={styles.container}>
         {loading || pondLoading ? (
           <LoadingSpinner />
         ) : (
           <View>
             {pond && pond?.pH && pond?.temp ? (
-              <>
+              <View>
                 <SelectPond />
                 <Graph histories={pond?.histories} />
                 <View
@@ -58,7 +55,7 @@ export default function HomeScreen() {
                   <PH pH={pond?.pH} />
                   <Temperature temp={pond?.temp} />
                 </View>
-              </>
+              </View>
             ) : (
               <NoDevice />
             )}

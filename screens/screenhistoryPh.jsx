@@ -9,12 +9,6 @@ import PhCard from "../components/cardHistoryPh";
 export default function ScreenHistoryPh({ histories }) {
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.headerContainer}>
-        <Text variant="headlineMedium" style={styles.textHeader}>
-          History pH
-        </Text>
-      </View>
-
       <View style={styles.contentContainer}>
         <FlatList
           showsVerticalScrollIndicator={false}
