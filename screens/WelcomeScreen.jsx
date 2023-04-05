@@ -55,10 +55,13 @@ export default function WelcomeScreen({ navigation }) {
             textAlign: "justify",
           }}
         >
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat.
+          ShrimPRO merupakan singkatan dari Produksi Udang dan Optimasi Sumber Daya.
+          Nama ini mencerminkan filosofi penggunaan teknologi untuk mengoptimalkan
+          produksi dan pengelolaan sumber daya pada sistem budidaya udang. ShrimPRO
+          melibatkan pemantauan pH dan suhu pada kolam udang menggunakan perangkat
+          IoT yang terhubung dengan sebuah aplikasi mobile. Hal ini memudahkan
+          budidaya udang, sehingga para petani dapat dengan mudah memantau dan
+          mengelola kolam udang mereka.
         </Text>
         <View
           style={{

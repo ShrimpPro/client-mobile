@@ -10,11 +10,9 @@ export const formatMoney = (money) =>
 
 export const phColor = (pH) => {
   let color;
-  if (pH >= 7 && pH <= 8.5) {
+  if (pH >= 6.75 && pH <= 7.75) {
     color = "#08b608";
-  } else if (pH >= 6 && pH < 7) {
-    color = "#ffa500";
-  } else if (pH >= 8.5 && pH <= 9.5) {
+  } else if (pH >= 6.5 && pH < 8) {
     color = "#ffa500";
   } else {
     color = "#ff0303";
@@ -24,11 +22,9 @@ export const phColor = (pH) => {
 
 export const phCategory = (pH) => {
   let category;
-  if (pH >= 7 && pH <= 8.5) {
+  if (pH >= 6.75 && pH <= 7.75) {
     category = "Normal";
-  } else if (pH >= 6 && pH < 7) {
-    category = "Waspada";
-  } else if (pH >= 8.5 && pH <= 9.5) {
+  } else if (pH >= 6.5 && pH < 8) {
     category = "Waspada";
   } else {
     category = "Bahaya";
@@ -38,9 +34,9 @@ export const phCategory = (pH) => {
 
 export const tempColor = (temp) => {
   let color;
-  if (temp >= 28 && temp <= 30) {
+  if (temp >= 26.5 && temp <= 28.5) {
     color = "#25aff3";
-  } else if (temp >= 18 && temp <= 36) {
+  } else if (temp >= 25 && temp <= 30) {
     color = "#ffa500";
   } else {
     color = "#ff0303";
@@ -50,9 +46,9 @@ export const tempColor = (temp) => {
 
 export const tempCategory = (temp) => {
   let category;
-  if (temp >= 28 && temp <= 30) {
+  if (temp >= 26.5 && temp <= 28.5) {
     category = "Normal";
-  } else if (temp >= 18 && temp <= 36) {
+  } else if (temp >= 25 && temp <= 30) {
     category = "Waspada";
   } else {
     category = "Bahaya";
