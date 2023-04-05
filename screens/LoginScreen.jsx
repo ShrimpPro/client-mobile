@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { postLogin } from "../store/actions/actionUser";
 import { useTheme } from "@react-navigation/native";
 import { CommonActions } from "@react-navigation/native";
+import { failureAlert, successAlert } from "../helpers";
 
 export default function LoginScreen({ navigation }) {
   const dispatch = useDispatch();
@@ -52,8 +53,11 @@ export default function LoginScreen({ navigation }) {
   };
 
   const loginHandler = (inputLogin) => {
+    if(!inputLogin.email) return failureAlert('Email is required');
+    if(!inputLogin.password) return failureAlert('Password is required');
     dispatch(postLogin(inputLogin))
       .then(() => {
+        successAlert('Logged In', 'Welcome to ShrimPro')
         navigation.dispatch(
           CommonActions.reset({
               index: 1,
@@ -63,10 +67,9 @@ export default function LoginScreen({ navigation }) {
               ],
           })
         );
-        console.log('Logged In');
       })
       .catch(err => {
-        console.log(err);
+        failureAlert(err.response.data.message);
       })
   }
 

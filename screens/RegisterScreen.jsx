@@ -5,6 +5,7 @@ import { TextInput, Switch, Button, Text } from "react-native-paper";
 import * as Font from "expo-font";
 import { postRegister } from "../store/actions/actionUser";
 import { useDispatch } from "react-redux";
+import { failureAlert, successAlert } from "../helpers";
 
 export default function RegisterScreen({ navigation }) {
   const dispatch = useDispatch();
@@ -25,9 +26,17 @@ export default function RegisterScreen({ navigation }) {
   };
 
   const registerHandler = () => {
+    if(!inputRegister.name) return failureAlert('Name is required');
+    if(!inputRegister.email) return failureAlert('Email is required');
+    if(!inputRegister.password) return failureAlert('Password is required');
+    if(!inputRegister.phoneNumber) return failureAlert('Phone Number is required');
+    if(!inputRegister.address) return failureAlert('Address is required');
     dispatch(postRegister(inputRegister))
-      .then(() => navigation.navigate('Login'))
-      .catch(err => console.log(err));
+      .then(() => {
+        successAlert('Your account has been created')
+        navigation.navigate('Login')
+      })
+      .catch(err => failureAlert(err.response.data.message));
   }
 
   return (

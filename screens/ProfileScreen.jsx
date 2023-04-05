@@ -15,7 +15,7 @@ import { fetchCurrentUser, fetchUserDetail, resetUsers } from "../store/actions/
 import * as SecureStore from "expo-secure-store";
 import { CommonActions } from "@react-navigation/native";
 import LoadingSpinner from "../components/LoadingSpinner";
-import { capitalizeFirstLetterAndLowerTheRest, pondCategory } from "../helpers";
+import { capitalizeFirstLetterAndLowerTheRest, pondCategory, successAlert } from "../helpers";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { resetPonds } from "../store/actions/actionPond";
@@ -58,6 +58,7 @@ export default function ProfileScreen({ navigation }) {
         routes: [{ name: "Login" }],
       })
     );
+    successAlert('Logged out');
   };
 
   return (

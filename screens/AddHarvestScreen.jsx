@@ -5,6 +5,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { useDispatch, useSelector } from "react-redux";
 import { createHarvest } from "../store/actions/actionPond";
 import { Picker } from "@react-native-picker/picker";
+import { failureAlert, successAlert } from "../helpers";
 
 export default function AddHarvestScreen({ navigation }) {
   const { pond } = useSelector((state) => state.ponds);
@@ -25,9 +26,16 @@ export default function AddHarvestScreen({ navigation }) {
   };
 
   const submitHarvest = () => {
+    if(!inputAddHarvest.capital) return failureAlert('Modal Awal diperlukan');
+    if(!inputAddHarvest.earning) return failureAlert('Hasil Pendapatan diperlukan');
+    if(!inputAddHarvest.quality) return failureAlert('Kualitas diperlukan');
+    if(!inputAddHarvest.description) return failureAlert('Deskripsi diperlukan');
     dispatch(createHarvest(inputAddHarvest, pond._id))
-      .then(() => navigation.goBack())
-      .catch((err) => console.log(err));
+      .then(() => {
+        navigation.goBack();
+        successAlert('Catatan panen berhasil ditambahkan');
+      })
+      .catch((err) => failureAlert(err.response.data.message));
   };
 
   return (
