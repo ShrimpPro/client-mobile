@@ -1,3 +1,5 @@
+import { showMessage, hideMessage } from "react-native-flash-message";
+
 export const formatDate = (date) => date.split("T")[0];
 export const formatMoney = (money) =>
   new Intl.NumberFormat("id-ID", {
@@ -149,3 +151,42 @@ export const dummyGraph = [
     createdAt: JSON.stringify(new Date())
   }
 ]
+
+export const successAlert = (message, description) => {
+  return showMessage({
+    message: message,
+    description: description,
+    type: "success",
+    icon: "auto",
+    duration: 2500,
+    backgroundColor: "rgb(75, 83, 188)",
+    color: "#fff",
+    onPress: () => {
+      hideMessage();
+    },
+    style: { borderRadius: 10, marginTop: 30 },
+    titleStyle: { fontSize: 18 },
+    textStyle: { fontSize: 16 },
+    floating: true,
+    position: "top",
+  });
+}
+
+export const failureAlert = (message, description) => {
+  return showMessage({
+    message: message,
+    description: description,
+    icon: "danger",
+    duration: 2500,
+    backgroundColor: "#ff0303",
+    color: "#fff",
+    onPress: () => {
+      hideMessage();
+    },
+    style: { borderRadius: 10, marginTop: 30 },
+    titleStyle: { fontSize: 18 },
+    textStyle: { fontSize: 16 },
+    floating: true,
+    position: "top",
+  });
+}

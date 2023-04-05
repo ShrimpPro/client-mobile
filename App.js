@@ -10,6 +10,8 @@ import {
 import blueTheme from "./assets/colors";
 import { useFonts } from "expo-font";
 import MainStack from "./navigators/MainStack";
+import FlashMessage from "react-native-flash-message";
+import { View } from "react-native";
 
 export default function App() {
   const [loaded] = useFonts({
@@ -45,6 +47,7 @@ export default function App() {
       <PaperProvider theme={theme}>
         <NavigationContainer theme={theme}>
           <MainStack />
+          <FlashMessage />
         </NavigationContainer>
       </PaperProvider>
     </Provider>

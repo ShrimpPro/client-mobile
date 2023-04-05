@@ -25,6 +25,6 @@ export default function ScreenHistoryPh({ histories }) {
 
 const styles = StyleSheet.create({
   contentContainer: {
-    paddingBottom: 60,
+    paddingBottom: 120,
   },
 });

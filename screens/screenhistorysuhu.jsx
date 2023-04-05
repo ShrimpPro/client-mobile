@@ -24,6 +24,6 @@ export default function HistorySuhu({ histories }) {
 
 const styles = StyleSheet.create({
   contentContainer: {
-    paddingBottom: 60,
+    paddingBottom: 120,
   },
 });

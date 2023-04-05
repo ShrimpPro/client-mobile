@@ -34,7 +34,7 @@ async function registerForPushNotificationsAsync() {
     //   return;
     // }
     token = (await Notifications.getExpoPushTokenAsync()).data;
-    console.log(token, "<<< token");
+    // console.log(token, "<<< token");
   } else {
     alert("Must use physical device for Push Notifications");
   }
@@ -82,14 +82,14 @@ export default function PushNotification() {
 
   useEffect(() => {
     async function run() {
-      console.log(expoPushToken, "<<< expo");
+      // console.log(expoPushToken, "<<< expo");
       const access_token = await SecureStore.getItemAsync("access_token");
       if (expoPushToken) {
         axios
           .patch(`${baseUrl}users/expo`, { token: expoPushToken }, {
             headers: { access_token }
           })
-          .then(({ data }) => console.log(data, "<<< data"))
+          // .then(({ data }) => console.log(data, "<<< data"))
           .catch((err) => console.log(err, "<<< error"));
       }
     }

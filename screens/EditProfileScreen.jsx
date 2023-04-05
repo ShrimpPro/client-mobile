@@ -6,6 +6,7 @@ import * as Font from "expo-font";
 import { fetchUserDetail, postRegister, putEditProfile } from "../store/actions/actionUser";
 import { useDispatch, useSelector } from "react-redux";
 import { useRoute } from "@react-navigation/native";
+import { failureAlert, successAlert } from "../helpers";
 
 export default function EditProfileScreen({ navigation }) {
   const dispatch = useDispatch();
@@ -38,9 +39,15 @@ export default function EditProfileScreen({ navigation }) {
   };
 
   const editProfileHandler = (id) => {
+    if(!inputEditProfile.name) return failureAlert('Name is required');
+    if(!inputEditProfile.phoneNumber) return failureAlert('Phone Number is required');
+    if(!inputEditProfile.address) return failureAlert('Address is required');
     dispatch(putEditProfile(id, inputEditProfile))
-      .then(() => navigation.navigate('Profile'))
-      .catch(err => console.log(err));
+      .then(() => {
+        navigation.navigate('Profile');
+        successAlert('Profile updated');
+      })
+      .catch(err => failureAlert(err.response.data.message));
   }
 
   return (
