@@ -62,16 +62,16 @@ export default function Graph({ histories }) {
                 }}
               />
             </View>
-            {/* <View>
+            <View>
               <Text variant="headlineMedium" style={styles.textHeader}>
                 Grafik PH
               </Text>
               <LineChart
                 data={{
-                  labels: historyDates(histories),
+                  labels: historyDates(hist),
                   datasets: [
                     {
-                      data: histories.map(({ pH }) => pH),
+                      data: hist.map(({ pH }) => pH),
                     },
                   ],
                 }}
@@ -103,7 +103,7 @@ export default function Graph({ histories }) {
                   marginHorizontal: 20,
                 }}
               />
-            </View> */}
+            </View>
           </>
         }
       </ScrollView>

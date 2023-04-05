@@ -68,7 +68,8 @@ const styles = StyleSheet.create({
   },
   headers: {
     alignItems: "center",
-    marginBottom: 20,
+    marginBottom: 17,
+    marginTop: 14,
     textAlign: "center",
     fontSize: 20,
     fontWeight: "bold",
