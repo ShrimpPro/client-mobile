@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchHarvestDetail } from "../store/actions/actionPond";
 import { Card } from "react-native-paper";
 import LoadingSpinner from "../components/LoadingSpinner";
-import { formatMoney, netProfit } from "../helpers";
+import { formatDate, formatMoney, netProfit } from "../helpers";
 
 export default function HarvestDetailScreen({ navigation }) {
   const { id } = useRoute().params;
@@ -24,6 +24,14 @@ export default function HarvestDetailScreen({ navigation }) {
         </View>
       ) : (
         <View style={styles.contentContainer}>
+          <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+            <Text variant="headlineMedium" style={[styles.headers, { paddingRight: 5 }]}>Detail Panen:</Text>
+            <Text variant="headlineMedium" style={styles.headers}>
+              {
+                harvest?.createdAt ? formatDate(harvest?.createdAt) : ''
+              }
+            </Text>
+          </View>
           <Card>
             <Card.Content>
               <View style={styles.dataContainer}>
@@ -76,6 +84,13 @@ const styles = StyleSheet.create({
   contentContainer: {
     marginVertical: 25,
     marginHorizontal: 20,
-    marginTop: 60
+    marginTop: 70
+  },
+  headers: {
+    alignItems: "center",
+    marginBottom: 17,
+    textAlign: "center",
+    fontSize: 20,
+    fontWeight: "bold",
   },
 });

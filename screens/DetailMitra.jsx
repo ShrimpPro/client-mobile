@@ -42,7 +42,9 @@ export default function DetailMitra() {
   return (
     <>
       {loading ? (
-        <LoadingSpinner />
+        <View style={{ flex: 1, justifyContent: 'center' }}>
+          <LoadingSpinner />
+        </View>
       ) : (
         <>
           <SafeAreaView style={styles.container}>

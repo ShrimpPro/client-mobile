@@ -21,7 +21,9 @@ export default function MitraListScreen({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
       {
-        loading ? <LoadingSpinner /> : <>
+        loading ? <View style={{ flex: 1, justifyContent: 'center' }}>
+          <LoadingSpinner />
+        </View> : <>
           <View>
             <FlatList
               showsVerticalScrollIndicator={false}
