@@ -11,7 +11,8 @@ import blueTheme from "./assets/colors";
 import { useFonts } from "expo-font";
 import MainStack from "./navigators/MainStack";
 import FlashMessage from "react-native-flash-message";
-import { View } from "react-native";
+import { LogBox } from 'react-native';
+LogBox.ignoreLogs(['Calling getExpoPushTokenAsync without specifying a projectId is deprecated']);
 
 export default function App() {
   const [loaded] = useFonts({
